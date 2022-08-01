@@ -1,0 +1,29 @@
+{
+    "branchPrefix": {
+        "separator": "",
+        "validator": "",
+        "prefixes": {}
+    },
+    "commitPrefix": {
+        "separator": " ",
+        "validator": "^.{1,45}$",
+        "prefixes": {
+            "F": "Feature (<= 8 LoC)",
+            "B": "Bug fix (<= 8 LoC)",
+            "R": "Test-supported Procedural Refactoring",
+            "t": "Test only",
+            "d": "Developer documentation (non-user facing)",
+            "a": "Automated formatting / code generation",
+            "r": "Provable (manual) refactoring",
+            "c": "Comments (add/delete)",
+            "e": "Environment (non-code) changes (for development)",
+            "F!!": "Feature (> 8 LoC)",
+            "B!!": "Bug fix (> 8 LoC)",
+            "R!!": "Non-provable refactoring",
+            "***": "Does not compile -- intermediate step"
+        }
+    },
+    "verboseMode": false,
+    "aliases": [],
+    "collaborators": []
+}
