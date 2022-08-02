@@ -3,7 +3,7 @@ import { add, format } from "date-fns";
 import "./WeeklyReset.css";
 
 import getMinutesToNextEvent from "../../date-tools/event-time-offset";
-import { getFormattedSkyTime, getLocalTime } from "../../date-tools/regional-time";
+import { getFormattedSkyTime } from "../../date-tools/regional-time";
 import { weeklyReset } from "../../event-times/event-times";
 
 export default function render({ currentDate }) {
