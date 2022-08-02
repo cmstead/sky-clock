@@ -7,11 +7,22 @@
     margin: 0 auto;
 }
 
+.events-table table {
+    border-collapse: collapse;
+}
+
 th, td {
     text-align: left;
+    margin: 0;
+    padding: 0.4em;
+
 }
 
 td + td, th + th {
     padding-left: 2.8em;
     padding-bottom: 0.5em;
+}
+
+tbody tr:nth-child(2n+1) {
+    background-color: #eafaff;
 }
