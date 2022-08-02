@@ -4,7 +4,8 @@ export const eventNames = {
     SUNSET: 'sunset',
     SHARD: 'shard',
     FAIRY_RING: 'fairyRing',
-    FOREST_RAINBOW: 'forestRainbow'
+    FOREST_RAINBOW: 'forestRainbow',
+    DAILY_RESET: 'dailyReset'
 };
 
 
@@ -22,7 +23,7 @@ export const eventTimes = {
         minute: (minute) => 35 - minute
     },
     [eventNames.SUNSET]: {
-        name: 'Sunset',
+        name: 'Sunset/Turtle',
         period: 120,
         hour: (hour) => hour % 2,
         minute: (minute) => 50 - minute
@@ -44,6 +45,17 @@ export const eventTimes = {
         period: 12 * 60,
         hour: (hour) => Math.abs(5 - hour) % 12,
         minute: (minute) => 0 - minute
-    }
+    },
+    [eventNames.DAILY_RESET]: {
+        name: 'Daily Reset',
+        period: 24 * 60,
+        hour: (hour) => 24 - hour,
+        minute: (minute) => 0 - minute
+    },
 };
 
+export const weeklyReset = {
+    period: 24 * 60,
+    hour: (hour) => 24 - hour,
+    minute: (minute) => 0 - minute
+};

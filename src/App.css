@@ -1,10 +1,23 @@
 .App-header {
   text-align: center;
-  background-color: #282c34;
-  font-size: calc(10px + 2vmin);
+  background-color: #87CEEB;
+  font-size: 2.4em;;
   color: white;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0.8em;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.main {
+  text-align: center;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.main main {
+  text-align: left;
 }

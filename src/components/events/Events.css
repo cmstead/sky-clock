@@ -1,0 +1,17 @@
+.events-table {
+    text-align: center;
+    padding-top: 1.6em
+}
+
+#events {
+    margin: 0 auto;
+}
+
+th, td {
+    text-align: left;
+}
+
+td + td, th + th {
+    padding-left: 2.8em;
+    padding-bottom: 0.5em;
+}

@@ -1,0 +1,23 @@
+.clock-display {
+    float: left;
+    width: 50%;
+    text-align: center;
+    font-size: 2.2em;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+}
+
+.clock-display > .label, .clock-display > .time {
+    display: block;
+    color: #333;
+}
+
+div.clock-display > span.label {
+    color: #999;
+}
+
+.clock::after {
+    content: "";
+    clear: both;
+    display: table;
+}

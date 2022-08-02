@@ -20,6 +20,10 @@ export function getLocalTime(date) {
     return getTimeTokens(formattedTime);
 }
 
+export function getFormattedSkyTime(date, formatString) {
+    return dateFnsTz.formatInTimeZone(date, US_PACIFIC_TIME_ZONE, TIME_PATTERN);;
+}
+
 export function getSkyTime(date) {
     const formattedTime = dateFnsTz.formatInTimeZone(date, US_PACIFIC_TIME_ZONE, TIME_PATTERN);
 

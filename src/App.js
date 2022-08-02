@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Clock from './components/clock/Clock';
 import Events from './components/events/Events';
+import WeeklyReset from './components/events/WeeklyReset';
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -23,6 +24,7 @@ function App() {
         <main>
           <Clock date={currentDate}></Clock>
           <Events currentDate={currentDate}></Events>
+          <WeeklyReset currentDate={currentDate}></WeeklyReset>
         </main>
       </div>
     </div>
