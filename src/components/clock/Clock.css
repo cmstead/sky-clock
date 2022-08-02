@@ -21,3 +21,11 @@ div.clock-display > span.label {
     clear: both;
     display: table;
 }
+
+@media screen and (max-width: 600px) {
+    .clock-display {
+        float: none;
+        text-align: center;
+        width: 100%;
+    }
+}
