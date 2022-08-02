@@ -21,7 +21,7 @@ export function getLocalTime(date) {
 }
 
 export function getFormattedSkyTime(date, formatString) {
-    return dateFnsTz.formatInTimeZone(date, US_PACIFIC_TIME_ZONE, TIME_PATTERN);;
+    return dateFnsTz.formatInTimeZone(date, US_PACIFIC_TIME_ZONE, formatString);;
 }
 
 export function getSkyTime(date) {

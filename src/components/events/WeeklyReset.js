@@ -11,7 +11,7 @@ export default function render({ currentDate }) {
 
     const eventData = weeklyReset;
     const minutesToMidnight = getMinutesToNextEvent(currentDate, eventData);
-    const daysUntilReset = minutesToMidnight === 0 ? 6 - currentDay : 5 - currentDay;
+    const daysUntilReset = minutesToMidnight === 0 ? 7 - currentDay : 6 - currentDay;
 
     const nextEventDate = add(currentDate, { days: daysUntilReset, minutes: minutesToMidnight });
 
