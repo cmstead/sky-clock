@@ -20,7 +20,7 @@ export default function render({ eventKey, currentDate }) {
         <tr className="event">
             <td>{eventData.name}</td>
             <td><Time hour={hour} minute={minute}></Time></td>
-            <td>{`${hoursOffset} hours, ${minutesOffset} minutes`}</td>
+            <td>{`${hoursOffset}h ${minutesOffset}m`}</td>
         </tr>
     );
 }

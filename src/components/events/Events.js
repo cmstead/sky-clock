@@ -13,8 +13,8 @@ export default function render({ currentDate }) {
                 <thead>
                     <tr>
                         <th>Event Name</th>
-                        <th>Next Event (local time)</th>
-                        <th>Time To Next Event</th>
+                        <th>Next Event</th>
+                        <th>Time to Next</th>
                     </tr>
                 </thead>
                 <tbody>
