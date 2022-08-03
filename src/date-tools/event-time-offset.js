@@ -29,6 +29,7 @@ export function getEventOffset(eventData, currentDate) {
     const { hour, minute } = getLocalTime(nextEventDate);
     
     return {
+        date: nextEventDate,
         minutesToNextEvent,
         hoursOffset,
         minutesOffset,
