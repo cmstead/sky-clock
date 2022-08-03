@@ -1,6 +1,8 @@
-import { getSkyTime } from "./regional-time"
+import { add } from 'date-fns';
 
-export default function getMinutesToNextEvent(currentDate, eventData) {
+import { getLocalTime, getSkyTime } from "./regional-time"
+
+export function getMinutesToNextEvent(currentDate, eventData) {
     const { hour, minute } = getSkyTime(currentDate);
 
     const hourOffset = eventData.hour(hour);
@@ -15,4 +17,22 @@ export default function getMinutesToNextEvent(currentDate, eventData) {
     } else {
         return eventData.period - Math.abs(minuteOffset);
     }
+}
+
+export function getEventOffset(eventData, currentDate) {
+    const minutesToNextEvent = getMinutesToNextEvent(currentDate, eventData);
+    
+    const hoursOffset = Math.floor(minutesToNextEvent / 60);
+    const minutesOffset = minutesToNextEvent % 60;
+    
+    const nextEventDate = add(currentDate, { minutes: minutesToNextEvent });
+    const { hour, minute } = getLocalTime(nextEventDate);
+    
+    return {
+        minutesToNextEvent,
+        hoursOffset,
+        minutesOffset,
+        hour,
+        minute
+    };
 }

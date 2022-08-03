@@ -26,3 +26,12 @@ td + td, th + th {
 tbody tr:nth-child(2n+1) {
     background-color: #eafaff;
 }
+
+table tbody tr.heading{
+    background-color: #efefef;
+}
+
+tr.heading td {
+    text-align: center;
+    font-weight: bold;
+}
