@@ -23,9 +23,6 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "rules": {
-      "no-unused-vars": [ "error", { "argsIgnorePattern": "^_" }]
-    },
     "extends": [
       "react-app",
       "react-app/jest"

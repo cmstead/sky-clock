@@ -8,7 +8,7 @@ import { useReducer } from 'react';
 
 export default function Event({ eventData }) {
     const { date, hour, minute, hoursOffset, minutesOffset } = eventData.offsetData;
-    const [_, updateUi] = useReducer(x => x + 1, 0);
+    const [, updateUi] = useReducer(x => x + 1, 0);
 
     const minutesToNextEvent = hoursOffset * 60 + minutesOffset;
 
