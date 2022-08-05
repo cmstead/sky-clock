@@ -75,7 +75,7 @@ export default function Render() {
                             },
                         },
                         line_linked: {
-                            enable: true,
+                            enable: false,
                             distance: 150,
                             color: "#87ceeb",
                             opacity: 0.4,
