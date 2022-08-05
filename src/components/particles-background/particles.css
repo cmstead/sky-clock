@@ -1,0 +1,5 @@
+.particles-js {
+    position: fixed;
+    width: auto;
+    z-index: -10;
+}

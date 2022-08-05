@@ -1,6 +1,6 @@
 .events-table {
     text-align: center;
-    padding-top: 1.6em
+    padding-top: 1.6em;
 }
 
 #events {
@@ -8,26 +8,28 @@
 }
 
 .events-table table {
+    background: white;
     border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
     text-align: left;
     margin: 0;
     padding: 0.4em;
-
 }
 
-td + td, th + th {
+td + td,
+th + th {
     padding-left: 2.8em;
     padding-bottom: 0.5em;
 }
 
-tbody tr:nth-child(2n+1) {
+tbody tr:nth-child(2n + 1) {
     background-color: #eafaff;
 }
 
-table tbody tr.heading{
+table tbody tr.heading {
     background-color: #efefef;
 }
 
