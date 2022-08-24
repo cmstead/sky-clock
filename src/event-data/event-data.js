@@ -1,3 +1,5 @@
+import { getFormattedSkyTime } from "../date-tools/regional-time";
+
 export const eventNames = {
     GEYSER: 'geyser',
     GRANDMA: 'grandma',
@@ -21,7 +23,7 @@ export const eventTypeNames = [
     'Reset'
 ];
 
-export const eventTimes = {
+const eventDefinitions = {
     [eventNames.GEYSER]: {
         name: 'Geyser',
         key: eventNames.GEYSER,
@@ -57,12 +59,11 @@ export const eventTimes = {
         }
     },
     [eventNames.SHARD]: {
-        name: 'Shard Event',
         key: eventNames.SHARD,
         type: eventTypes.WAX,
-        period: 240,
+        period: 120,
         hour: (hour) => hour % 2,
-        minute: (minute) => 56 - minute
+        minute: (minute) => 50 - minute
     },
     [eventNames.SUNSET]: {
         name: 'Sunset',
@@ -97,6 +98,21 @@ export const eventTimes = {
         minute: (minute) => 0 - minute
     },
 };
+
+const getCurrentDay = (eventData) => parseInt(getFormattedSkyTime(eventData.currentDate, 'i'));
+
+Object.defineProperty(eventDefinitions[eventNames.SHARD], 'name', {
+    get: () => {
+        const eventData = eventDefinitions[eventNames.SHARD];
+        const currentDay = getCurrentDay(eventData);
+        const isRedShard = [5, 6, 7].includes(currentDay);
+        const shardColor = isRedShard ? 'Red' : 'Black';
+
+        return `Shard (${shardColor})*`;
+    }
+});
+
+export { eventDefinitions };
 
 export const weeklyReset = {
     period: 24 * 60,

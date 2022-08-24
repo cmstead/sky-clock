@@ -2,7 +2,7 @@ import Event from "./Event";
 
 import "./Events.css";
 
-import { eventNames, eventTimes, eventTypeNames } from "../../event-times/event-times";
+import { eventNames, eventDefinitions, eventTypeNames } from "../../event-data/event-data";
 import { getEventOffset } from "../../date-tools/event-time-offset";
 
 export default function render({ currentDate }) {
@@ -11,9 +11,10 @@ export default function render({ currentDate }) {
         const eventKeyNames = Object.keys(eventNames);
 
         const eventRecords = eventKeyNames.map((eventKeyName) => {
-            const eventData = eventTimes[eventNames[eventKeyName]];
+            const eventData = eventDefinitions[eventNames[eventKeyName]];
 
             eventData.offsetData = getEventOffset(eventData, currentDate);
+            eventData.currentDate = currentDate;
 
             return eventData;
         });
