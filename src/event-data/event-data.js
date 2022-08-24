@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { getFormattedSkyTime } from "../date-tools/regional-time";
 
 export const eventNames = {
     GEYSER: 'geyser',
@@ -89,7 +89,7 @@ const eventDefinitions = {
     },
 };
 
-const getCurrentDay = (eventData) => parseInt(format(eventData.currentDate, 'i'));
+const getCurrentDay = (eventData) => parseInt(getFormattedSkyTime(eventData.currentDate, 'i'));
 
 Object.defineProperty(eventDefinitions[eventNames.SHARD], 'name', {
     get: () => {
