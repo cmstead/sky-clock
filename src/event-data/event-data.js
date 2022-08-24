@@ -89,11 +89,13 @@ const eventDefinitions = {
     },
 };
 
+const getCurrentDay = (eventData) => parseInt(format(eventData.currentDate, 'i'));
+
 Object.defineProperty(eventDefinitions[eventNames.SHARD], 'name', {
     get: () => {
         const eventData = eventDefinitions[eventNames.SHARD];
-        const currentDay = format(eventData.currentDate, 'i');
-        const isRedShard = [5, 6, 7].includes(parseInt(currentDay))
+        const currentDay = getCurrentDay(eventData);
+        const isRedShard = [5, 6, 7].includes(currentDay);
         const shardColor = isRedShard ? 'Red' : 'Black';
 
         return `Shard (${shardColor})*`;
