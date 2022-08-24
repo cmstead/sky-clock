@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const eventNames = {
     GEYSER: 'geyser',
     GRANDMA: 'grandma',
@@ -21,7 +23,7 @@ export const eventTypeNames = [
     'Reset'
 ];
 
-export const eventTimes = {
+const eventDefinitions = {
     [eventNames.GEYSER]: {
         name: 'Geyser',
         key: eventNames.GEYSER,
@@ -47,7 +49,6 @@ export const eventTimes = {
         minute: (minute) => 50 - minute
     },
     [eventNames.SHARD]: {
-        name: 'Shard Event*',
         key: eventNames.SHARD,
         type: eventTypes.WAX,
         period: 120,
@@ -87,6 +88,19 @@ export const eventTimes = {
         minute: (minute) => 0 - minute
     },
 };
+
+Object.defineProperty(eventDefinitions[eventNames.SHARD], 'name', {
+    get: () => {
+        const eventData = eventDefinitions[eventNames.SHARD];
+        const currentDay = format(eventData.currentDate, 'i');
+        const isRedShard = [5, 6, 7].includes(parseInt(currentDay))
+        const shardColor = isRedShard ? 'Red' : 'Black';
+
+        return `Shard (${shardColor})*`;
+    }
+});
+
+export { eventDefinitions };
 
 export const weeklyReset = {
     period: 24 * 60,

@@ -4,7 +4,7 @@ import "./WeeklyReset.css";
 
 import { getMinutesToNextEvent } from "../../date-tools/event-time-offset";
 import { getFormattedSkyTime } from "../../date-tools/regional-time";
-import { weeklyReset } from "../../event-times/event-times";
+import { weeklyReset } from "../../event-data/event-data";
 
 export default function render({ currentDate }) {
     const currentDay = parseInt(getFormattedSkyTime(currentDate, 'i'));
