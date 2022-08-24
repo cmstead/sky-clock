@@ -5,7 +5,7 @@ export default function render({ eventData }) {
 
     return (
         <tr className="event">
-            <td>{eventData.name}</td>
+            <td>{typeof eventData.name === 'function' ? eventData.name() : eventData.name}</td>
             <td><Time hour={hour} minute={minute}></Time></td>
             <td>{`${hoursOffset}h ${minutesOffset}m`}</td>
         </tr>

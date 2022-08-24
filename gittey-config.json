@@ -24,6 +24,11 @@
         }
     },
     "verboseMode": false,
-    "aliases": [],
+    "aliases": [
+        {
+            "name": "push",
+            "command": "gittey commit; git push"
+        }
+    ],
     "collaborators": []
 }

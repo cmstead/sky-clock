@@ -47,12 +47,12 @@ export const eventTimes = {
         minute: (minute) => 50 - minute
     },
     [eventNames.SHARD]: {
-        name: 'Shard Event',
+        name: 'Shard Event*',
         key: eventNames.SHARD,
         type: eventTypes.WAX,
         period: 120,
         hour: (hour) => hour % 2,
-        minute: (minute) => 56 - minute
+        minute: (minute) => 50 - minute
     },
     [eventNames.SUNSET]: {
         name: 'Sunset',
