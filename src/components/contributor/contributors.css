@@ -1,13 +1,26 @@
+h3 {
+    line-height: .6em;
+}
+
 #contributors {
     text-align: center;
-    width: 60%;
-    margin: 0 auto;
-    padding-top: 1.2em;
+    width: 100%;
+    margin-top: 1.2em;
+    padding-top: .6em;
     padding-bottom: 1.2em;
+
+    background-color: var(--color-footer-bg);
 }
 
 #contributors ul {
+    display: block;
     width: 40%;
+    margin: 0 auto;
+    padding-bottom: .9em;
     text-align: left;
-    margin-left: 6em;
+}
+
+#contributors ul li {
+    list-style: none;
+    margin-left: 8em;
 }

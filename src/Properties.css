@@ -13,6 +13,9 @@
   --color-tr-head: #efefef;
   --color-tr-even: #fff;
   --color-tr-odd: #eafaff;
+
+  /* Footer */
+  --color-footer-bg: #eafaff;
 }
 
 /* Background base colors: #070F16, #0B1823, #102233, #152D42, #1A3751 */
@@ -31,4 +34,7 @@
   --color-tr-head: #102233;
   --color-tr-even: #070F16;
   --color-tr-odd: #0B1823;
+
+  /* Footer */
+  --color-footer-bg: #0B1823;
 }
