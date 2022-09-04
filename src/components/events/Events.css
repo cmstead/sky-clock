@@ -23,12 +23,21 @@ td + td, th + th {
     padding-bottom: 0.5em;
 }
 
-tbody tr:nth-child(2n+1) {
-    background-color: #eafaff;
+
+tbody tr:nth-child(2n) {
+    background-color: var(--color-tr-even);
 }
 
-table tbody tr.heading{
-    background-color: #efefef;
+th .bell {
+    color: #999;
+}
+
+tbody tr:nth-child(2n+1) {
+    background-color: var(--color-tr-odd);
+}
+
+table tbody tr.heading {
+    background-color: var(--color-tr-head);
 }
 
 tr.heading td {
