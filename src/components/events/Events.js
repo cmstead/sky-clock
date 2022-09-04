@@ -52,7 +52,7 @@ export default function render({ currentDate }) {
     function getGroupHeader({ group: groupName }) {
         return (
             <tr className="heading" key={groupName}>
-                <td colSpan="3">{groupName}</td>
+                <td colSpan="4">{groupName}</td>
             </tr>
         );
     }
@@ -70,6 +70,7 @@ export default function render({ currentDate }) {
             <table id="events">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Event Name</th>
                         <th>Next Event</th>
                         <th>Time to Next</th>
