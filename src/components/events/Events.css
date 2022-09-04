@@ -23,8 +23,13 @@ td + td, th + th {
     padding-bottom: 0.5em;
 }
 
+
 tbody tr:nth-child(2n) {
     background-color: var(--color-tr-even);
+}
+
+th .bell {
+    color: #999;
 }
 
 tbody tr:nth-child(2n+1) {

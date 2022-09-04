@@ -30,7 +30,11 @@ const eventDefinitions = {
         type: eventTypes.WAX,
         period: 120,
         hour: (hour) => hour % 2,
-        minute: (minute) => 5 - minute
+        minute: (minute) => 5 - minute,
+        notification: {
+            body: 'Geyser erupts in {t} minutes!',
+            image: '/images/events/geyser.jpg'
+        }
     },
     [eventNames.GRANDMA]: {
         name: 'Grandma',
@@ -38,7 +42,11 @@ const eventDefinitions = {
         type: eventTypes.WAX,
         period: 120,
         hour: (hour) => hour % 2,
-        minute: (minute) => 35 - minute
+        minute: (minute) => 35 - minute,
+        notification: {
+            body: 'Grandma is visiting in {t} minutes!',
+            image: '/images/events/grandma.jpg'
+        }
     },
     [eventNames.TURTLE]: {
         name: 'Turtle',
@@ -46,14 +54,21 @@ const eventDefinitions = {
         type: eventTypes.WAX,
         period: 120,
         hour: (hour) => hour % 2,
-        minute: (minute) => 50 - minute
+        minute: (minute) => 50 - minute,
+        notification: {
+            body: 'Sanctuary turtle is visiting in {t} minutes!'
+        }
     },
     [eventNames.SHARD]: {
         key: eventNames.SHARD,
         type: eventTypes.WAX,
         period: 120,
         hour: (hour) => hour % 2,
-        minute: (minute) => 50 - minute
+        minute: (minute) => 50 - minute,
+        notification: {
+            body: 'A shard is falling in {t} minutes!',
+            image: '/images/events/shard.jpg'
+        }
     },
     [eventNames.SUNSET]: {
         name: 'Sunset',
