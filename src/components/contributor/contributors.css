@@ -1,0 +1,13 @@
+#contributors {
+    text-align: center;
+    width: 60%;
+    margin: 0 auto;
+    padding-top: 1.2em;
+    padding-bottom: 1.2em;
+}
+
+#contributors ul {
+    width: 40%;
+    text-align: left;
+    margin-left: 6em;
+}
