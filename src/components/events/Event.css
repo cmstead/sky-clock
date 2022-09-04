@@ -1,8 +1,8 @@
 td .bell {
-  color: #ccc;
+  color: var(--color-bell);
   cursor: pointer;
 }
 
 td .bell[data-active="true"] {
-  color: #1e89b4;
+  color: var(--color-bell-active);
 }

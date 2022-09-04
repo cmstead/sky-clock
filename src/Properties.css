@@ -16,10 +16,17 @@
 
   /* Footer */
   --color-footer-bg: #eafaff;
+
+  /* Links */
+  --color-link: #0000EE;
+  --color-link-visited: #551A8B;
+
+  --color-bell: #ccc;
+  --color-bell-active: #1e89b4;
 }
 
 /* Background base colors: #070F16, #0B1823, #102233, #152D42, #1A3751 */
-.dark-theme {
+[data-theme="dark"] {
   /* Text */
   --color-text-primary: #fff;  
   --color-text-accent: #909090;
@@ -37,4 +44,8 @@
 
   /* Footer */
   --color-footer-bg: #0B1823;
+
+  /* Links */
+  --color-link: #6f7af0;
+  --color-link-visited: #904ecd;
 }
