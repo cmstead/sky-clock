@@ -1,29 +1,46 @@
 .App-header {
-    text-align: center;
-    background-color: #87ceeb;
-    font-size: 2.4em;
-    color: white;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 0.8em;
+  position: relative;
+  text-align: center;
+  background-color: var(--color-bg-accent);
+  font-size: 2.4em;;
+  color: var(--color-text-head);
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0.8em;
 }
 
 .App-link {
-    color: #61dafb;
+  color: #61dafb;
 }
 
 .main {
-    text-align: center;
-    width: 60%;
-    margin: 0 auto;
+  text-align: center;
+  width: 60%;
+  margin: 0 auto;
 }
 
 .main main {
-    text-align: left;
+  text-align: left;
+}
+
+#shard-disclaimer {
+  padding-top: 1.4em;
+  text-align: center;
 }
 
 @media screen and (max-width: 600px) {
-    .main {
-        width: 100%;
-    }
+  .main {
+    width: 100%;
+  }
+}
+
+.theme {
+  position: absolute;
+  display: inline-block;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  font-size: 24px;
+  cursor: pointer;
+  user-select: none;
 }

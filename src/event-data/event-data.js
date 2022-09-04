@@ -1,3 +1,5 @@
+import { getFormattedSkyTime } from "../date-tools/regional-time";
+
 export const eventNames = {
     GEYSER: 'geyser',
     GRANDMA: 'grandma',
@@ -21,14 +23,18 @@ export const eventTypeNames = [
     'Reset'
 ];
 
-export const eventTimes = {
+const eventDefinitions = {
     [eventNames.GEYSER]: {
         name: 'Geyser',
         key: eventNames.GEYSER,
         type: eventTypes.WAX,
         period: 120,
         hour: (hour) => hour % 2,
-        minute: (minute) => 5 - minute
+        minute: (minute) => 5 - minute,
+        notification: {
+            body: 'Geyser erupts in {t} minutes!',
+            image: '/images/events/geyser.jpg'
+        }
     },
     [eventNames.GRANDMA]: {
         name: 'Grandma',
@@ -36,7 +42,11 @@ export const eventTimes = {
         type: eventTypes.WAX,
         period: 120,
         hour: (hour) => hour % 2,
-        minute: (minute) => 35 - minute
+        minute: (minute) => 35 - minute,
+        notification: {
+            body: 'Grandma is visiting in {t} minutes!',
+            image: '/images/events/grandma.jpg'
+        }
     },
     [eventNames.TURTLE]: {
         name: 'Turtle',
@@ -44,15 +54,21 @@ export const eventTimes = {
         type: eventTypes.WAX,
         period: 120,
         hour: (hour) => hour % 2,
-        minute: (minute) => 50 - minute
+        minute: (minute) => 50 - minute,
+        notification: {
+            body: 'Sanctuary turtle is visiting in {t} minutes!'
+        }
     },
     [eventNames.SHARD]: {
-        name: 'Shard Event',
         key: eventNames.SHARD,
         type: eventTypes.WAX,
-        period: 240,
+        period: 120,
         hour: (hour) => hour % 2,
-        minute: (minute) => 56 - minute
+        minute: (minute) => 50 - minute,
+        notification: {
+            body: 'A shard is falling in {t} minutes!',
+            image: '/images/events/shard.jpg'
+        }
     },
     [eventNames.SUNSET]: {
         name: 'Sunset',
@@ -87,6 +103,21 @@ export const eventTimes = {
         minute: (minute) => 0 - minute
     },
 };
+
+const getCurrentDay = (eventData) => parseInt(getFormattedSkyTime(eventData.currentDate, 'i'));
+
+Object.defineProperty(eventDefinitions[eventNames.SHARD], 'name', {
+    get: () => {
+        const eventData = eventDefinitions[eventNames.SHARD];
+        const currentDay = getCurrentDay(eventData);
+        const isRedShard = [5, 6, 7].includes(currentDay);
+        const shardColor = isRedShard ? 'Red' : 'Black';
+
+        return `Shard (${shardColor})*`;
+    }
+});
+
+export { eventDefinitions };
 
 export const weeklyReset = {
     period: 24 * 60,

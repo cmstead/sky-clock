@@ -27,7 +27,7 @@ export default function Render() {
                 options={{
                     particles: {
                         number: {
-                            value: 25,
+                            value: 17,
                             density: {
                                 enable: true,
                                 value_area: 800,
@@ -62,7 +62,7 @@ export default function Render() {
                             },
                         },
                         size: {
-                            value: 24,
+                            value: 14,
                             random: {
                                 enable: true,
                                 minimumValue: 4,
@@ -124,7 +124,7 @@ export default function Render() {
                                 speed: 3,
                             },
                             repulse: {
-                                distance: 100,
+                                distance: 200,
                                 duration: 0.4,
                             },
                             push: {
