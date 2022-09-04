@@ -1,8 +1,8 @@
 .App-header {
   text-align: center;
-  background-color: #87CEEB;
+  background-color: var(--color-bg-accent);
   font-size: 2.4em;;
-  color: white;
+  color: var(--color-text-head);
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
   padding: 0.8em;
