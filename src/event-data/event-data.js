@@ -32,7 +32,8 @@ const eventDefinitions = {
         hour: (hour) => hour % 2,
         minute: (minute) => 5 - minute,
         notification: {
-            body: 'Geyser erupts in {t} minutes!'
+            body: 'Geyser erupts in {t} minutes!',
+            image: '/images/events/geyser.jpg'
         }
     },
     [eventNames.GRANDMA]: {
@@ -63,7 +64,11 @@ const eventDefinitions = {
         type: eventTypes.WAX,
         period: 120,
         hour: (hour) => hour % 2,
-        minute: (minute) => 50 - minute
+        minute: (minute) => 50 - minute,
+        notification: {
+            body: 'A shard is falling in {t} minutes!',
+            image: '/images/events/shard.jpg'
+        }
     },
     [eventNames.SUNSET]: {
         name: 'Sunset',

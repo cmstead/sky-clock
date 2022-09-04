@@ -28,17 +28,16 @@ export default function Event({ eventData }) {
 
     const { date, hour, minute, hoursOffset, minutesOffset } = eventData.offsetData;
     
-    //console.log('Event called for', eventData);
     (function showNotification() {
 
         const minutesToNextEvent = hoursOffset * 60 + minutesOffset;
         const notificationWindow = eventData.notification?.minutes ?? 5;
-            
+
         const shouldNotify = isSubscribed
             && minutesToNextEvent <= notificationWindow
             && lastNotification < eventData.currentDate.getTime()
             && lastNotification < (date.getTime() - (notificationWindow + 1) * 60000);
-        
+
         if (shouldNotify) {
             const notification = buildNotification(eventData, minutesToNextEvent);
             notify(notification);
