@@ -1,0 +1,34 @@
+:root {
+  /* Text */
+  --color-text-primary: #000;
+  --color-text-accent: #999;
+  --color-text-accent-dark: #333;
+  --color-text-head: #fff;
+  
+  /* Background */
+  --color-bg-primary: #fff;
+  --color-bg-accent: #87CEEB;
+
+  /* Table */
+  --color-tr-head: #efefef;
+  --color-tr-even: #fff;
+  --color-tr-odd: #eafaff;
+}
+
+/* Background base colors: #070F16, #0B1823, #102233, #152D42, #1A3751 */
+.dark-theme {
+  /* Text */
+  --color-text-primary: #fff;  
+  --color-text-accent: #909090;
+  --color-text-accent-dark: #e3e3e3;
+  --color-text-head: #fff;
+
+  /* Background */
+  --color-bg-primary: #070F16;
+  --color-bg-accent: #102233;
+
+  /* Table */
+  --color-tr-head: #102233;
+  --color-tr-even: #070F16;
+  --color-tr-odd: #0B1823;
+}

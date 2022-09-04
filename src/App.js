@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './Properties.css';
 import './App.css';
 import Clock from './components/clock/Clock';
 import Events from './components/events/Events';
@@ -6,6 +7,10 @@ import WeeklyReset from './components/events/WeeklyReset';
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
+  
+  // Determine dark theme by OS preference.
+  const darkTheme = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+  document.getElementsByTagName('body')[0].classList.toggle('dark-theme', !!darkTheme);
 
   useEffect(() => {
     const interval = setInterval(() => {

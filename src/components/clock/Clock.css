@@ -9,11 +9,11 @@
 
 .clock-display > .label, .clock-display > .time {
     display: block;
-    color: #333;
+    color: var(--color-text-accent-dark);
 }
 
 div.clock-display > span.label {
-    color: #999;
+    color: var(--color-text-accent);
 }
 
 .clock::after {
