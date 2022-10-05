@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
-import './Properties.css';
+import useLocalstorage from './hooks/localstorage';
 import './App.css';
 import Contributors from './components/contributor/Contributors';
 import Clock from './components/clock/Clock';
 import Events from './components/events/Events';
 import WeeklyReset from './components/events/WeeklyReset';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
-  
-  // Determine dark theme by OS preference.
-  const darkTheme = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-  document.getElementsByTagName('body')[0].classList.toggle('dark-theme', !!darkTheme);
+  const [theme, setTheme] = useLocalstorage('theme', (window.matchMedia?.('(prefers-color-scheme: dark)').matches && 'dark') || 'light');
+  document.getElementsByTagName('body')[0].setAttribute('data-theme', theme);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,10 +21,17 @@ function App() {
     return () => clearInterval(interval);
   });
 
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         Sky Clock
+        <div className="theme" onClick={toggleTheme}>
+          <FontAwesomeIcon className="icon-theme" icon={theme === 'light' ? faMoon : faSun } />
+        </div>
       </header>
       <div className='main'>
         <main>

@@ -1,4 +1,5 @@
 .App-header {
+  position: relative;
   text-align: center;
   background-color: var(--color-bg-accent);
   font-size: 2.4em;;
@@ -31,4 +32,15 @@
   .main {
     width: 100%;
   }
+}
+
+.theme {
+  position: absolute;
+  display: inline-block;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  font-size: 24px;
+  cursor: pointer;
+  user-select: none;
 }
