@@ -10,5 +10,6 @@ td .bell[data-active="true"] {
 @media only screen and (max-width:600px)  {
   td.notification {
     visibility: hidden;
+    width: 0px;
   }
 }
