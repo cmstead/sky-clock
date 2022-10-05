@@ -53,7 +53,7 @@ export default function Event({ eventData }) {
 
     return (
         <tr className="event">
-            <td><FontAwesomeIcon className="bell" data-active={isSubscribed} icon={faBell} onClick={toggleNotificationSubscription} /></td>
+            <td className="notification"><FontAwesomeIcon className="bell" data-active={isSubscribed} icon={faBell} onClick={toggleNotificationSubscription} /></td>
             <td>{eventData.name}</td>
             <td><Time hour={hour} minute={minute}></Time></td>
             <td>{`${hoursOffset}h ${minutesOffset}m`}</td>

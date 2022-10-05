@@ -5,7 +5,7 @@ export const eventNames = {
     GRANDMA: 'grandma',
     TURTLE: 'turtle',
     SUNSET: 'sunset',
-    SHARD: 'shard',
+    // SHARD: 'shard',
     FAIRY_RING: 'fairyRing',
     FOREST_RAINBOW: 'forestRainbow',
     DAILY_RESET: 'dailyReset'
@@ -104,15 +104,20 @@ const eventDefinitions = {
     },
 };
 
-const getCurrentDay = (eventData) => parseInt(getFormattedSkyTime(eventData.currentDate, 'i'));
+const getCurrentDay = (currentDate) => parseInt(getFormattedSkyTime(currentDate, 'i'));
+
+
+export function getShardColor(currentDate) {
+    const currentDay = getCurrentDay(currentDate);
+    const isRedShard = [5, 6, 7].includes(currentDay);
+    return isRedShard ? 'Red' : 'Black';
+}
 
 Object.defineProperty(eventDefinitions[eventNames.SHARD], 'name', {
     get: () => {
         const eventData = eventDefinitions[eventNames.SHARD];
-        const currentDay = getCurrentDay(eventData);
-        const isRedShard = [5, 6, 7].includes(currentDay);
-        const shardColor = isRedShard ? 'Red' : 'Black';
-
+        const shardColor = getShardColor(eventData.currentDate);
+    
         return `Shard (${shardColor})*`;
     }
 });

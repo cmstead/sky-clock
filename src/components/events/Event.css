@@ -6,3 +6,9 @@ td .bell {
 td .bell[data-active="true"] {
   color: #1e89b4;
 }
+
+@media only screen and (max-width:600px)  {
+  td.notification {
+    display: none;
+  }
+}
