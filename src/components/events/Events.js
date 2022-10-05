@@ -70,7 +70,7 @@ export default function render({ currentDate }) {
             <table id="events">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th className="notification"></th>
                         <th>Event Name</th>
                         <th>Next Event</th>
                         <th>Time to Next</th>
