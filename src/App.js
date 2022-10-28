@@ -38,9 +38,6 @@ function App() {
           <Clock date={currentDate}></Clock>
           <Events currentDate={currentDate}></Events>
           <WeeklyReset currentDate={currentDate}></WeeklyReset>
-          {/* <div id="shard-disclaimer">
-            <div>* All shard event times are approximate and may vary up to 10 minutes.</div>
-          </div> */}
         </main>
       </div>
           <Contributors></Contributors>

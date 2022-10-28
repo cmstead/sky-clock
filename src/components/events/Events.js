@@ -85,7 +85,7 @@ export default function render({ currentDate }) {
                                     : getEventElement(eventData))
 
                     }
-                    <tr className="heading"><td colSpan="4">Shard Color: {getShardColor(currentDate)}</td></tr>
+                    <tr className="heading"><td colSpan="4">Shard Events: Randomized</td></tr>
                 </tbody>
             </table>
         </div>
