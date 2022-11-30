@@ -14,6 +14,10 @@ function getShardData(daysToAdd = 0) {
   const dayOfWk = today.getDay(); //Sunday(0) to Saturday(6)
   //Red Shard on Odd days, Black Shard on Even days
   const isRed = dayOfMth % 2 === 1;
+  //Red Shard have 3 different timings:468;148;218, Black Shard have 2 different timings:118;138
+  const minsIndex = isRed ? ((dayOfMth - 1) / 2) % 3 : ((dayOfMth / 2) % 2) + 3;
+
+  const minsFromResets = [468, 148, 218, 118, 138][minsIndex]; //+40 seconds to start
 }
 
 export default function Shard() {
