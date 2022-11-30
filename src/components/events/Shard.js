@@ -3,6 +3,12 @@ const dateFns = require('date-fns');
 
 const LocalToSky = (new Date().getTimezoneOffset() * 60) + (dateFnsTz.getTimezoneOffset('America/Los_Angeles') / 1000);
 
+
+const initRealm = {
+  date: dateFnsTz.utcToZonedTime(new Date(22, 10)), //2022 Nov 1st
+  idx: 0, //Prairie
+};
+
 function getNowInSky() {
   return dateFns.addSeconds(new Date(), LocalToSky);
 }
@@ -50,6 +56,9 @@ function getShardData(daysToAdd = 0) {
   }
 
   //**Text**
+  // Count number days since init, realm repeat every 5 day
+  const realmIdx = (dateFns.differenceInDays(today, initRealm.date) + initRealm.idx) % 5;
+  const realm = ['Daylight Prairie', 'Hidden Forest', 'Valley Of Triumph', 'Golden Wasteland', 'Vault Of Knowledge'][realmIdx];
 }
 
 export default function Shard() {
