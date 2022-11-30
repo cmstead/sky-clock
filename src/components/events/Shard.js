@@ -23,6 +23,7 @@ function getShardData(daysToAdd = 0) {
     return null;
   }
 
+  //**Timings**
   const minsFromResets = [468, 148, 218, 118, 138][minsIndex]; //+40 seconds to start
   const hourRepeat = isRed ? 6 : 8;
   const duration = { hours: 3, minutes: 51, seconds: 20 }; //After start
@@ -48,6 +49,7 @@ function getShardData(daysToAdd = 0) {
     return null;
   }
 
+  //**Text**
 }
 
 export default function Shard() {
