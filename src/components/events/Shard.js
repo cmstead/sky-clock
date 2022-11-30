@@ -110,9 +110,9 @@ export default function Shard() {
   const skippedDays = new Array(daysAdded).fill(0).map((_, days) => dateFns.format(dateFns.addDays(getNowInSky(), days + 1), "do")).join(', ');
 
   const details = [
-    `Realm: ${realm}`,
-    `Map: ${map}`,
-    `Color: ${isRed ? "Red" : "Black"} `,
+    ['Realm', realm],
+    ['Map', map],
+    ['Color', isRed ? 'Red' : 'Black'],
   ]
 
   if (state) {
@@ -122,7 +122,7 @@ export default function Shard() {
   return (
     <>
       <tr className='heading'><td colSpan='4'>Shard Eruptions</td></tr>
-      {details.map((t, i) => <tr key={i} className='shard-detail'><td colSpan={4}>{t}</td></tr>)}
+      {details.map(([h, v], i) => <tr key={i} className='shard-detail'><td colSpan={4}><strong>{h}: </strong>{v}</td></tr>)}
       {sortedDates.map(([partsKey, date]) => <ShardRows key={partsKey} partsKey={partsKey} date={date} daysAdded={daysAdded} />)}
     </>
   );
