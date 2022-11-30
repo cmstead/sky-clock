@@ -77,6 +77,33 @@ function getShardData(daysToAdd = 0) {
   return { isRed, realm, map, sortedDates, daysAdded: daysToAdd };
 }
 
+function distanceBetween(date, fromDate) {
+  const improperSecs = dateFns.differenceInSeconds(fromDate, date, { roundingMethod: 'ceil' });
+  const seconds = Math.floor(improperSecs % 60);
+  const minutes = Math.floor(improperSecs / 60 % 60);
+  const hours = Math.floor(improperSecs / 60 / 60 % 24);
+  const days = Math.floor(improperSecs / 60 / 60 / 24);
+  return { days, hours, minutes, seconds };
+}
+
+function ShardRows({ partsKey, date }) {
+  const { days, hours, minutes, seconds } = distanceBetween(getNowInSky(), date);
+  const name = ({
+    start: "Shard Lands",
+    end: "Shard Ends",
+    earlySky: "Early Shard Sky",
+    gateShard: "Gate Shard",
+  })[partsKey]
+  return (
+    <tr className="event">
+      <td className="notification" />
+      <td>{name}</td>
+      <td>{dateFns.format(dateFns.subSeconds(date, LocalToSky), `HH:mm:ss`)}</td>
+      <td>{`${days ? `${days}d ` : ''}${hours ? `${hours}h ` : ''}${minutes ? `${minutes}m ` : ''}${seconds}s`}</td>
+    </tr>
+  );
+}
+
 export default function Shard() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { state, isRed, realm, map, sortedDates, daysAdded } = useMemo(() => getShardData(), [Math.floor(new Date().getMinutes())]); //Calculate every minute
@@ -96,7 +123,7 @@ export default function Shard() {
     <>
       <tr className='heading'><td colSpan='4'>Shard Eruptions</td></tr>
       {details.map((t, i) => <tr key={i} className='shard-detail'><td colSpan={4}>{t}</td></tr>)}
-      
+      {sortedDates.map(([partsKey, date]) => <ShardRows key={partsKey} partsKey={partsKey} date={date} daysAdded={daysAdded} />)}
     </>
   );
 }
