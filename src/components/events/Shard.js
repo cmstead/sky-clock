@@ -41,6 +41,13 @@ function getShardData(daysToAdd = 0) {
     earlySky: (dateFns.isAfter(now, earlySky) ? acc.earlySky : earlySky),
     gateShard: (dateFns.isAfter(now, gateShard) ? acc.gateShard : gateShard),
   }, { start: null, end: null, earlySky: null, gateShard: null });
+
+  const sortedDates = Object.entries(nextByParts).filter(([, d]) => d).sort(([, a], [, b]) => dateFns.compareAsc(a, b));
+
+  if (sortedDates.length === 0) {
+    return null;
+  }
+
 }
 
 export default function Shard() {
