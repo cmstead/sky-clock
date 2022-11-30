@@ -28,6 +28,14 @@ function getShardData(daysToAdd = 0) {
   const duration = { hours: 3, minutes: 51, seconds: 20 }; //After start
   const earlySkyOffset = { minutes: 39, seconds: 40 }// 39m40s before start 
   const gateShardOffset = { minutes: 8, seconds: 40 }// 8m40s before start
+
+  const occurrences = Array.from({ length: 3 }, (_, nth) => {
+    const start = dateFns.add(today, { hours: nth * hourRepeat, minutes: minsFromResets, seconds: 40 });
+    const end = dateFns.add(start, duration);
+    const earlySky = dateFns.sub(start, earlySkyOffset);
+    const gateShard = dateFns.sub(start, gateShardOffset);
+    return { earlySky, gateShard, start, end, };
+  })
 }
 
 export default function Shard() {
