@@ -59,6 +59,13 @@ function getShardData(daysToAdd = 0) {
   // Count number days since init, realm repeat every 5 day
   const realmIdx = (dateFns.differenceInDays(today, initRealm.date) + initRealm.idx) % 5;
   const realm = ['Daylight Prairie', 'Hidden Forest', 'Valley Of Triumph', 'Golden Wasteland', 'Vault Of Knowledge'][realmIdx];
+  const map = [
+    ["Cave", "Bird Nest", "Sanctuary Island", "Butterfly Field", "Village Islands / Koi Pond"],
+    ["Forest End / Garden", "Treehouse", "Elevated Clearing", "Forest Brook", "Boneyard"],
+    ["Village of Dreams", "Village of Dreams", "Hermit valley", "Ice Rink", "Ice Rink"],
+    ["Graveyard", "Crabfield", "Forgotten Ark", "Broken Temple", "Battlefield"],
+    ["Jellyfish Cove", "Jellyfish Cove", "Jellyfish Cove", "Starlight Desert", "Starlight Desert"],
+  ][realmIdx][minsIndex];
 }
 
 export default function Shard() {
