@@ -3,6 +3,10 @@ const dateFns = require('date-fns');
 
 const LocalToSky = (new Date().getTimezoneOffset() * 60) + (dateFnsTz.getTimezoneOffset('America/Los_Angeles') / 1000);
 
+const AbnormalState = {
+  TODAY_ENDED: 1,
+  NO_SHARD: 2,
+}
 
 const initRealm = {
   date: dateFnsTz.utcToZonedTime(new Date(22, 10)), //2022 Nov 1st
@@ -26,7 +30,7 @@ function getShardData(daysToAdd = 0) {
   //   468:Mon;Tue, 148:Tue;Wed, 218:Wed;Thu, 118:Sat;Sun, 138:Sun;Mon
   const haveShard = ![[1, 2], [2, 3], [3, 4], [6, 0], [0, 1]][minsIndex].includes(dayOfWk);
   if (!haveShard) {
-    return null;
+    return { state: AbnormalState.NO_SHARD, ...getShardData(daysToAdd + 1) };
   }
 
   //**Timings**
@@ -52,7 +56,7 @@ function getShardData(daysToAdd = 0) {
   const sortedDates = Object.entries(nextByParts).filter(([, d]) => d).sort(([, a], [, b]) => dateFns.compareAsc(a, b));
 
   if (sortedDates.length === 0) {
-    return null;
+    return { state: AbnormalState.TODAY_ENDED, ...getShardData(daysToAdd + 1) };
   }
 
   //**Text**
@@ -66,6 +70,8 @@ function getShardData(daysToAdd = 0) {
     ["Graveyard", "Crabfield", "Forgotten Ark", "Broken Temple", "Battlefield"],
     ["Jellyfish Cove", "Jellyfish Cove", "Jellyfish Cove", "Starlight Desert", "Starlight Desert"],
   ][realmIdx][minsIndex];
+
+  return { isRed, realm, map, sortedDates, daysAdded: daysToAdd };
 }
 
 export default function Shard() {
