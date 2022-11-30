@@ -1,0 +1,9 @@
+table tbody tr.shard-detail {
+  background-color: var(--color-tr-head);
+}
+
+tr.shard-detail td {
+  text-align: left;
+  font-weight: bold;
+  padding-left: 1em;
+}

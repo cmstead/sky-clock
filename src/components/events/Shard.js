@@ -1,3 +1,6 @@
+import { useMemo } from 'react';
+import "./Shard.css"
+
 const dateFnsTz = require('date-fns-tz');
 const dateFns = require('date-fns');
 
@@ -75,11 +78,25 @@ function getShardData(daysToAdd = 0) {
 }
 
 export default function Shard() {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const { state, isRed, realm, map, sortedDates, daysAdded } = useMemo(() => getShardData(), [Math.floor(new Date().getMinutes())]); //Calculate every minute
+  const skippedDays = new Array(daysAdded).fill(0).map((_, days) => dateFns.format(dateFns.addDays(getNowInSky(), days + 1), "do")).join(', ');
+
+  const details = [
+    `Realm: ${realm}`,
+    `Map: ${map}`,
+    `Color: ${isRed ? "Red" : "Black"} `,
+  ]
+
+  if (state) {
+    details.unshift([``, `All shard eruptions has ended`, `(╯°□°)╯︵ ┻━┻ No Shard on ${skippedDays}`][state])
+  }
+
   return (
     <>
-      <tr className='heading'>
-        <td colSpan='4'>Shard Eruptions</td>
-      </tr>
+      <tr className='heading'><td colSpan='4'>Shard Eruptions</td></tr>
+      {details.map((t, i) => <tr key={i} className='shard-detail'><td colSpan={4}>{t}</td></tr>)}
+      
     </>
   );
 }
