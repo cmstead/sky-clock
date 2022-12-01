@@ -6,11 +6,6 @@ const dateFns = require('date-fns');
 
 const LocalToSky = (new Date().getTimezoneOffset() * 60) + (dateFnsTz.getTimezoneOffset('America/Los_Angeles') / 1000);
 
-const AbnormalState = {
-  TODAY_ENDED: 1,
-  NO_SHARD: 2,
-}
-
 const initRealm = {
   date: dateFnsTz.utcToZonedTime(new Date(22, 10)), //2022 Nov 1st
   idx: 0, //Prairie
@@ -33,7 +28,7 @@ function getShardData(daysToAdd = 0) {
   //   468:Mon;Tue, 148:Tue;Wed, 218:Wed;Thu, 118:Sat;Sun, 138:Sun;Mon
   const haveShard = ![[1, 2], [2, 3], [3, 4], [6, 0], [0, 1]][minsIndex].includes(dayOfWk);
   if (!haveShard) {
-    return { state: AbnormalState.NO_SHARD, ...getShardData(daysToAdd + 1) };
+    return { noShard: true, ...getShardData(daysToAdd + 1) };
   }
 
   //**Timings**
@@ -59,7 +54,7 @@ function getShardData(daysToAdd = 0) {
   const sortedDates = Object.entries(nextByParts).filter(([, d]) => d).sort(([, a], [, b]) => dateFns.compareAsc(a, b));
 
   if (sortedDates.length === 0) {
-    return { state: AbnormalState.TODAY_ENDED, ...getShardData(daysToAdd + 1) };
+    return { noMore: true, ...getShardData(daysToAdd + 1) };
   }
 
   //**Text**
@@ -74,7 +69,15 @@ function getShardData(daysToAdd = 0) {
     ["Jellyfish Cove", "Jellyfish Cove", "Jellyfish Cove", "Starlight Desert", "Starlight Desert"],
   ][realmIdx][minsIndex];
 
-  return { isRed, realm, map, sortedDates, daysAdded: daysToAdd };
+  const rewards = !isRed ? `200 wax` :
+    ({
+      'Forest End / Garden': '2.5',
+      'Treehouse': '3.5',
+      'Village of Dreams': '2.5',
+      'Jellyfish Cove': '3.5',
+    })[map] ?? ['2.0', '2.5', '3.0'][minsIndex] + ' Ascended Candles';
+
+  return { isRed, realm, map, rewards, sortedDates, daysAdded: daysToAdd };
 }
 
 function distanceBetween(date, fromDate) {
@@ -106,23 +109,23 @@ function ShardRows({ partsKey, date }) {
 
 export default function Shard() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const { state, isRed, realm, map, sortedDates, daysAdded } = useMemo(() => getShardData(), [Math.floor(new Date().getMinutes())]); //Calculate every minute
-  const skippedDays = new Array(daysAdded).fill(0).map((_, days) => dateFns.format(dateFns.addDays(getNowInSky(), days + 1), "do")).join(', ');
+  const { noShard, noMore, isRed, realm, map, rewards, sortedDates, daysAdded } = useMemo(() => getShardData(), [Math.floor(new Date().getMinutes())]); //Calculate every minute
+  const skippedDays = new Array(daysAdded).fill(0).map((_, days) => dateFns.format(dateFns.addDays(getNowInSky(), days + 1), "do"));
 
-  const details = [
-    ['Realm', realm],
-    ['Map', map],
-    ['Color', isRed ? 'Red' : 'Black'],
-  ]
-
-  if (state) {
-    details.unshift([``, `All shard eruptions has ended`, `(╯°□°)╯︵ ┻━┻ No Shard on ${skippedDays}`][state])
-  }
 
   return (
     <>
       <tr className='heading'><td colSpan='4'>Shard Eruptions</td></tr>
-      {details.map(([h, v], i) => <tr key={i} className='shard-detail'><td colSpan={4}><strong>{h}: </strong>{v}</td></tr>)}
+      {noMore && <tr className='shard-detail'><td colSpan='4'>All shard eruptions has ended on {skippedDays.shift()}</td></tr>}
+      {noShard && <tr className='shard-detail'><td colSpan='4'>(╯°□°)╯︵ ┻━┻ No Shard on {skippedDays.join(', ')}</td></tr>}
+      <tr className='shard-detail'>
+        <td colSpan='2'><strong>Realm: </strong>{realm}</td>
+        <td colSpan='2'><strong>Color: </strong>{isRed ? 'Red' : 'Black'}</td>
+      </tr>
+      <tr className='shard-detail'>
+        <td colSpan='2'><strong>Map: </strong>{map}</td>
+        <td colSpan='2'><strong>Rewards: </strong>{rewards}</td>
+      </tr>
       {sortedDates.map(([partsKey, date]) => <ShardRows key={partsKey} partsKey={partsKey} date={date} daysAdded={daysAdded} />)}
     </>
   );

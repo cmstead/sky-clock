@@ -1,3 +1,10 @@
 table tbody tr.shard-detail {
   background-color: var(--color-tr-head);
 }
+tr.shard-detail td:first-child {
+  padding-left: .2em;
+}
+
+tr.shard-detail td:last-child {
+  padding-left: 0;
+}
