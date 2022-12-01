@@ -35,7 +35,7 @@ function getShardData(daysToAdd = 0) {
   const minsFromResets = [468, 148, 218, 118, 138][minsIndex]; //+40 seconds to start
   const hourRepeat = isRed ? 6 : 8;
   const duration = { hours: 3, minutes: 51, seconds: 20 }; //After start
-  const earlySkyOffset = { minutes: 38, seconds: 50 }// 40m30s before start 
+  const earlySkyOffset = { minutes: 40, seconds: 30 }// 40m30s before start 
   const gateShardOffset = { minutes: 8, seconds: 40 }// 8m40s before start
 
   const nextByParts = Array.from({ length: 3 }, (_, nth) => {
