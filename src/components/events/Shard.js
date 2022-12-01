@@ -110,14 +110,14 @@ function ShardRows({ partsKey, date }) {
 export default function Shard() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const { noShard, noMore, isRed, realm, map, rewards, sortedDates, daysAdded } = useMemo(() => getShardData(), [Math.floor(new Date().getMinutes())]); //Calculate every minute
-  const skippedDays = new Array(daysAdded).fill(0).map((_, days) => dateFns.format(dateFns.addDays(getNowInSky(), days + 1), "do"));
+  const skippedDays = new Array(daysAdded).fill(0).map((_, days) => dateFns.format(dateFns.addDays(getNowInSky(), days), "do"));
 
 
   return (
     <>
       <tr className='heading'><td colSpan='4'>Shard Eruptions</td></tr>
-      {noMore && <tr className='shard-detail'><td colSpan='4'>All shard eruptions has ended on {skippedDays.shift()}</td></tr>}
-      {noShard && <tr className='shard-detail'><td colSpan='4'>(╯°□°)╯︵ ┻━┻ No Shard on {skippedDays.join(', ')}</td></tr>}
+      {noMore && <tr className='heading'><td colSpan='4'>All shard eruptions on the {skippedDays.shift()} has ended</td></tr>}
+      {noShard && <tr className='heading'><td colSpan='4'>(╯°□°)╯︵ ┻━┻ No Shard on the {skippedDays.join(', ')}</td></tr>}
       <tr className='shard-detail'>
         <td colSpan='2'><strong>Realm: </strong>{realm}</td>
         <td colSpan='2'><strong>Color: </strong>{isRed ? 'Red' : 'Black'}</td>
