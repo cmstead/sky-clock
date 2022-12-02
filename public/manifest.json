@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Sky Clock",
+  "name": "Sky Clock",
   "icons": [
     {
       "src": "favicon.ico",
