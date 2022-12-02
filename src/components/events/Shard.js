@@ -6,6 +6,11 @@ const dateFns = require('date-fns');
 
 const LocalToSky = (new Date().getTimezoneOffset() * 60) + (dateFnsTz.getTimezoneOffset('America/Los_Angeles') / 1000);
 
+//Shards constants
+const duration = { hours: 3, minutes: 51, seconds: 20 }; //After start
+const earlySkyOffset = { minutes: 40, seconds: 50 }// 40m30s before start 
+const gateShardOffset = { minutes: 8, seconds: 40 }// 8m40s before start
+
 const initRealm = {
   date: dateFnsTz.utcToZonedTime(new Date(22, 10)), //2022 Nov 1st
   idx: 0, //Prairie
@@ -34,9 +39,6 @@ function getShardData(daysToAdd = 0) {
   //**Timings**
   const minsFromResets = [468, 148, 218, 118, 138][minsIndex]; //+40 seconds to start
   const hourRepeat = isRed ? 6 : 8;
-  const duration = { hours: 3, minutes: 51, seconds: 20 }; //After start
-  const earlySkyOffset = { minutes: 40, seconds: 30 }// 40m30s before start 
-  const gateShardOffset = { minutes: 8, seconds: 40 }// 8m40s before start
 
   const nextByParts = Array.from({ length: 3 }, (_, nth) => {
     const start = dateFns.add(today, { hours: nth * hourRepeat, minutes: minsFromResets, seconds: 40 });
