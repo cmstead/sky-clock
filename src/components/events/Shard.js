@@ -4,20 +4,19 @@ import "./Shard.css"
 const dateFnsTz = require('date-fns-tz');
 const dateFns = require('date-fns');
 
-const LocalToSky = (new Date().getTimezoneOffset() * 60) + (dateFnsTz.getTimezoneOffset('America/Los_Angeles') / 1000);
-
 //Shards constants
 const duration = { hours: 3, minutes: 51, seconds: 20 }; //After start
 const earlySkyOffset = { minutes: 40, seconds: 50 }// 40m30s before start 
 const gateShardOffset = { minutes: 8, seconds: 40 }// 8m40s before start
 
 const initRealm = {
-  date: dateFnsTz.utcToZonedTime(new Date(22, 10)), //2022 Nov 1st
+  date: new Date(22, 10), //2022 Nov 1st
   idx: 0, //Prairie
 };
 
 function getNowInSky() {
-  return dateFns.addSeconds(new Date(), LocalToSky);
+  //date-fns-tz checks browser timezone, sooo from utc seems to work ¯\_(ツ)_/¯
+  return dateFnsTz.utcToZonedTime(new Date(), 'America/Los_Angeles');
 }
 
 function getShardData(daysToAdd = 0) {
@@ -82,17 +81,10 @@ function getShardData(daysToAdd = 0) {
   return { isRed, realm, map, rewards, sortedDates, daysAdded: daysToAdd };
 }
 
-function distanceBetween(date, fromDate) {
-  const improperSecs = dateFns.differenceInSeconds(fromDate, date, { roundingMethod: 'ceil' });
-  const seconds = Math.floor(improperSecs % 60);
-  const minutes = Math.floor(improperSecs / 60 % 60);
-  const hours = Math.floor(improperSecs / 60 / 60 % 24);
-  const days = Math.floor(improperSecs / 60 / 60 / 24);
-  return { days, hours, minutes, seconds };
-}
-
 function ShardRows({ partsKey, date }) {
-  const { days, hours, minutes, seconds } = distanceBetween(getNowInSky(), date);
+  const duration = dateFns.intervalToDuration({ start: getNowInSky(), end: date });
+  const localDate = dateFns.add(new Date(), { ...duration, seconds: duration.seconds + 1 });
+  const { days, hours, minutes, seconds } = duration
   const name = ({
     start: "Shard Lands",
     end: "Shard Ends",
@@ -103,7 +95,7 @@ function ShardRows({ partsKey, date }) {
     <tr className="event">
       <td className="notification" />
       <td>{name}</td>
-      <td>{dateFns.format(dateFns.subSeconds(date, LocalToSky), `HH:mm:ss`)}</td>
+      <td>{dateFns.format(localDate, 'HH:mm:ss')}</td>
       <td>{`${days ? `${days}d ` : ''}${hours ? `${hours}h ` : ''}${minutes ? `${minutes}m ` : ''}${seconds}s`}</td>
     </tr>
   );
