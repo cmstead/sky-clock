@@ -82,7 +82,9 @@ function getShardData(daysToAdd = 0) {
 }
 
 function ShardRows({ partsKey, date }) {
-  const duration = dateFns.intervalToDuration({ start: getNowInSky(), end: date });
+  const skyNow = getNowInSky();
+  if (dateFns.isAfter(skyNow, date)) return;
+  const duration = dateFns.intervalToDuration({ start: skyNow, end: date });
   const localDate = dateFns.add(new Date(), { ...duration, seconds: duration.seconds + 1 });
   const { days, hours, minutes, seconds } = duration
   const name = ({
@@ -103,7 +105,7 @@ function ShardRows({ partsKey, date }) {
 
 export default function Shard() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const { noShard, noMore, isRed, realm, map, rewards, sortedDates, daysAdded } = useMemo(() => getShardData(), [Math.floor(new Date().getMinutes())]); //Calculate every minute
+  const { noShard, noMore, isRed, realm, map, rewards, sortedDates, daysAdded } = useMemo(() => getShardData(), [Math.floor(new Date().getSeconds() / 10)]); //Calculate every 10 seconds
   const skippedDays = new Array(daysAdded).fill(0).map((_, days) => dateFns.format(dateFns.addDays(getNowInSky(), days), "do"));
 
 
