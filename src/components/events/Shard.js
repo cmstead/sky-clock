@@ -87,6 +87,8 @@ function ShardRows({ partsKey, date }) {
   const duration = dateFns.intervalToDuration({ start: skyNow, end: date });
   const localDate = dateFns.add(new Date(), { ...duration, seconds: duration.seconds + 1 });
   const { days, hours, minutes, seconds } = duration
+  const localStr = dateFns.format(localDate, days ? `do, H:mm` : `HH:mm:ss`);
+  const relStr = [days && `${days}d`, hours && `${hours}h`, minutes && `${minutes}m`, !days && `${seconds}s`].filter(Boolean).join(' ');
   const name = ({
     start: "Shard Lands",
     end: "Shard Ends",
@@ -97,8 +99,8 @@ function ShardRows({ partsKey, date }) {
     <tr className="event">
       <td className="notification" />
       <td>{name}</td>
-      <td>{dateFns.format(localDate, 'HH:mm:ss')}</td>
-      <td>{`${days ? `${days}d ` : ''}${hours ? `${hours}h ` : ''}${minutes ? `${minutes}m ` : ''}${seconds}s`}</td>
+      <td>{localStr}</td>
+      <td>{relStr}</td>
     </tr>
   );
 }
@@ -112,8 +114,8 @@ export default function Shard() {
   return (
     <>
       <tr className='heading'><td colSpan='4'>Shard Eruptions</td></tr>
-      {noMore && <tr className='heading'><td colSpan='4'>All shard eruptions on the {skippedDays.shift()} has ended</td></tr>}
-      {noShard && <tr className='heading'><td colSpan='4'>No Shard on the {skippedDays.join(', ')}. (╯°□°)╯︵ ┻━┻ </td></tr>}
+      {noMore && <tr className='shard-status'><td colSpan='4'>All shard eruptions on the {skippedDays.shift()} has ended</td></tr>}
+      {noShard && <tr className='shard-status'><td colSpan='4'>No Shard on the {skippedDays.join(', ')}. (╯°□°)╯︵ ┻━┻ </td></tr>}
       {daysAdded > 0 && <tr className='heading'><td colSpan='4'> Shard eruptions for {dateFns.format(dateFns.addDays(getNowInSky(), daysAdded), "do 'of' MMM")} </td></tr>}
       <tr className='shard-detail'>
         <td colSpan='2'><strong>Realm: </strong>{realm}</td>
