@@ -113,7 +113,7 @@ export default function Shard() {
     <>
       <tr className='heading'><td colSpan='4'>Shard Eruptions</td></tr>
       {noMore && <tr className='heading'><td colSpan='4'>All shard eruptions on the {skippedDays.shift()} has ended</td></tr>}
-      {noShard && <tr className='heading'><td colSpan='4'>(╯°□°)╯︵ ┻━┻ No Shard on the {skippedDays.join(', ')}</td></tr>}
+      {noShard && <tr className='heading'><td colSpan='4'>No Shard on the {skippedDays.join(', ')}. (╯°□°)╯︵ ┻━┻ </td></tr>}
       {daysAdded > 0 && <tr className='heading'><td colSpan='4'> Shard eruptions for {dateFns.format(dateFns.addDays(getNowInSky(), daysAdded), "do 'of' MMM")} </td></tr>}
       <tr className='shard-detail'>
         <td colSpan='2'><strong>Realm: </strong>{realm}</td>
