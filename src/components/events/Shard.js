@@ -71,12 +71,12 @@ function getShardData(daysToAdd = 0) {
   ][realmIdx][minsIndex];
 
   const rewards = !isRed ? `200 wax` :
-    ({
+    (({
       'Forest End / Garden': '2.5',
       'Treehouse': '3.5',
       'Village of Dreams': '2.5',
       'Jellyfish Cove': '3.5',
-    })[map] ?? ['2.0', '2.5', '3.0'][minsIndex] + ' Ascended Candles';
+    })[map] ?? ['2.0', '2.5', '3.0'][minsIndex]) + ' Ascended Candles';
 
   return { isRed, realm, map, rewards, sortedDates, daysAdded: daysToAdd };
 }
