@@ -9,11 +9,6 @@ const duration = { hours: 3, minutes: 51, seconds: 20 }; //After start
 const earlySkyOffset = { minutes: 40, seconds: 50 }// 40m30s before start 
 const gateShardOffset = { minutes: 8, seconds: 40 }// 8m40s before start
 
-const initRealm = {
-  date: new Date(22, 10), //2022 Nov 1st
-  idx: 0, //Prairie
-};
-
 function getNowInSky() {
   //date-fns-tz checks browser timezone, sooo from utc seems to work ¯\_(ツ)_/¯
   return dateFnsTz.utcToZonedTime(new Date(), 'America/Los_Angeles');
@@ -59,8 +54,7 @@ function getShardData(daysToAdd = 0) {
   }
 
   //**Text**
-  // Count number days since init, realm repeat every 5 day
-  const realmIdx = (dateFns.differenceInDays(today, initRealm.date) + initRealm.idx) % 5;
+  const realmIdx = (dayOfMth) % 5;
   const realm = ['Daylight Prairie', 'Hidden Forest', 'Valley Of Triumph', 'Golden Wasteland', 'Vault Of Knowledge'][realmIdx];
   const map = [
     ["Cave", "Bird Nest", "Sanctuary Island", "Butterfly Field", "Village Islands / Koi Pond"],
