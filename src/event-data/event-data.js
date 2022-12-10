@@ -8,19 +8,23 @@ export const eventNames = {
     // SHARD: 'shard',
     FAIRY_RING: 'fairyRing',
     FOREST_RAINBOW: 'forestRainbow',
-    DAILY_RESET: 'dailyReset'
+    DAILY_RESET: 'dailyReset',
+    CONCERT_GRABSEATS: 'grabSeats',
+    CONCERT_STARTS: 'concertStarts'
 };
 
 export const eventTypes = {
     WAX: 0,
     ENVIRONMENT: 1,
-    RESET: 2
+    RESET: 2,
+    CONCERT: 3
 };
 
 export const eventTypeNames = [
     'Wax',
     'Environment',
-    'Reset'
+    'Reset',
+    'Aurora Concert'
 ];
 
 const eventDefinitions = {
@@ -101,6 +105,22 @@ const eventDefinitions = {
         period: 24 * 60,
         hour: (hour) => 24 - hour,
         minute: (minute) => 0 - minute
+    },
+    [eventNames.CONCERT_GRABSEATS]: {
+        name: 'Grab Seats',
+        key: eventNames.CONCERT_GRABSEATS,
+        type: eventTypes.CONCERT,
+        period: 4 * 60,
+        hour: (hour) => 0 - hour,
+        minute: (minute) => 0 - minute,
+    },
+    [eventNames.CONCERT_STARTS]: {
+        name: 'Concert Starts',
+        key: eventNames.CONCERT_STARTS,
+        type: eventTypes.CONCERT,
+        period: 4 * 60,
+        hour: (hour) => 0 - hour,
+        minute: (minute) => 10 - minute,
     },
 };
 
