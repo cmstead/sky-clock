@@ -2,7 +2,7 @@ import Event from "./Event";
 
 import "./Events.css";
 
-import { eventNames, eventDefinitions, eventTypeNames, getShardColor } from "../../event-data/event-data";
+import { eventNames, eventDefinitions, eventTypeNames } from "../../event-data/event-data";
 import { getEventOffset } from "../../date-tools/event-time-offset";
 
 export default function render({ currentDate }) {
