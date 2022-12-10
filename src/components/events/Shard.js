@@ -54,7 +54,7 @@ function getShardData(daysToAdd = 0) {
   }
 
   //**Text**
-  const realmIdx = (dayOfMth) % 5;
+  const realmIdx = (dayOfMth - 1) % 5;
   const realm = ['Daylight Prairie', 'Hidden Forest', 'Valley Of Triumph', 'Golden Wasteland', 'Vault Of Knowledge'][realmIdx];
   const map = [
     ["Cave", "Bird Nest", "Sanctuary Island", "Butterfly Field", "Village Islands / Koi Pond"],
