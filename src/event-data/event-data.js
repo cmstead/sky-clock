@@ -111,7 +111,7 @@ const eventDefinitions = {
         key: eventNames.CONCERT_GRABSEATS,
         type: eventTypes.CONCERT,
         period: 4 * 60,
-        hour: (hour) => 0 - hour,
+        hour: (hour) => hour % 4,
         minute: (minute) => 0 - minute,
     },
     [eventNames.CONCERT_STARTS]: {
@@ -119,7 +119,7 @@ const eventDefinitions = {
         key: eventNames.CONCERT_STARTS,
         type: eventTypes.CONCERT,
         period: 4 * 60,
-        hour: (hour) => 0 - hour,
+        hour: (hour) => hour % 4,
         minute: (minute) => 10 - minute,
     },
 };
