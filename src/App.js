@@ -7,6 +7,7 @@ import Events from './components/events/Events';
 import WeeklyReset from './components/events/WeeklyReset';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import Particles from "./components/particles-background/particles";
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <div className="App">
+      <Particles />
       <header className="App-header">
         Sky Clock
         <div className="theme" onClick={toggleTheme}>
