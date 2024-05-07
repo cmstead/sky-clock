@@ -10,7 +10,8 @@ export const eventNames = {
     FOREST_RAINBOW: 'forestRainbow',
     DAILY_RESET: 'dailyReset',
     CONCERT_GRABSEATS: 'grabSeats',
-    CONCERT_STARTS: 'concertStarts'
+    CONCERT_STARTS: 'concertStarts',
+    CINNAMOROLL_CAFE: 'Cinnamoroll Cafe',
 };
 
 export const eventTypes = {
@@ -121,6 +122,17 @@ const eventDefinitions = {
         period: 4 * 60,
         hour: (hour) => (2 + hour) % 4,
         minute: (minute) => 10 - minute,
+    },
+    [eventNames.CINNAMOROLL_CAFE]: {
+        name: 'Cinnamoroll Cafe',
+        key: eventNames.CINNAMOROLL_CAFE,
+        type: eventTypes.WAX,
+        period: 60,
+        hour: (_) => 0,
+        minute: (minute) => 0 - minute,
+        notification: {
+            body: 'Cinnamoroll Cafe Bun event is starting in {t} minutes!',
+        }
     },
 };
 
