@@ -1,5 +1,5 @@
 h3 {
-    line-height: .6em;
+    line-height: 1em;
 }
 
 #contributors {
@@ -13,14 +13,18 @@ h3 {
 }
 
 #contributors ul {
-    display: block;
+    display: inline;
     width: 40%;
     margin: 0 auto;
     padding-bottom: .9em;
-    text-align: left;
+    text-align: center;
 }
 
 #contributors ul li {
     list-style: none;
-    margin-left: 8em;
+    margin-left: auto;
+}
+
+#contributors div {
+    margin-top: 2.5em;
 }
