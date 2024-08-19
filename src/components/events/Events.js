@@ -90,4 +90,4 @@ export default function render({ currentDate }) {
             </table>
         </div>
     );
-}"
+}
