@@ -6,6 +6,7 @@ export const eventNames = {
     TURTLE: 'turtle',
     SUNSET: 'sunset',
     // SHARD: 'shard',
+    DREAMS_SKATER: 'dreamsSkater',
     FAIRY_RING: 'fairyRing',
     FOREST_RAINBOW: 'forestRainbow',
     DAILY_RESET: 'dailyReset',
@@ -63,6 +64,17 @@ const eventDefinitions = {
             body: 'Sanctuary turtle is visiting in {t} minutes!'
         }
     },
+    [eventNames.DREAMS_SKATER]: {
+        name: 'Dreams Skater',
+        key: eventNames.DREAMS_SKATER,
+        type: eventTypes.WAX,
+        period: 120,
+        hour: (hour) => (hour + 1) % 2,
+        minute: (minute) => 5 - minute,
+        notification: {
+            body: 'Dreams skater will begin skating in {t} minutes!'
+        }
+    },
     [eventNames.SHARD]: {
         key: eventNames.SHARD,
         type: eventTypes.WAX,
@@ -75,7 +87,7 @@ const eventDefinitions = {
         }
     },
     [eventNames.SUNSET]: {
-        name: 'Sunset',
+        name: 'Sanctuary Sunset',
         key: eventNames.SUNSET,
         type: eventTypes.ENVIRONMENT,
         period: 120,
