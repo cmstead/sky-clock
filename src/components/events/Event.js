@@ -55,8 +55,8 @@ export default function Event({ eventData }) {
         <tr className="event">
             <td className="notification"><FontAwesomeIcon className="bell" data-active={isSubscribed} icon={faBell} onClick={toggleNotificationSubscription} /></td>
             <td>{eventData.name}</td>
-            <td><Time hour={hour} minute={minute}></Time></td>
-            <td>{`${hoursOffset}h ${minutesOffset}m`}</td>
+            <td>{eventData.isToday() ? <Time hour={hour} minute={minute}></Time> : 'No event today'}</td>
+            <td>{eventData.isToday() ? `${hoursOffset}h ${minutesOffset}m` : ''}</td>
         </tr>
     );
 }

@@ -1,5 +1,7 @@
 import { getFormattedSkyTime } from "../date-tools/regional-time";
 
+const getCurrentDay = (currentDate) => parseInt(getFormattedSkyTime(currentDate, 'i'));
+
 export const eventNames = {
     GEYSER: 'geyser',
     GRANDMA: 'grandma',
@@ -28,7 +30,7 @@ export const eventTypeNames = [
     'Aurora Concert'
 ];
 
-const eventDefinitions = {
+const eventDefinitionsBase = {
     [eventNames.GEYSER]: {
         name: 'Geyser',
         key: eventNames.GEYSER,
@@ -69,21 +71,11 @@ const eventDefinitions = {
         key: eventNames.DREAMS_SKATER,
         type: eventTypes.WAX,
         period: 120,
-        hour: (hour) => (hour + 1) % 2,
-        minute: (minute) => 5 - minute,
+        isToday: () => [5, 6, 7].includes(getCurrentDay(Date.now())),
+        hour: (hour) => eventDefinitionsBase[eventNames.DREAMS_SKATER].isToday() ? (hour + 1) % 2 : 100,
+        minute: (minute) => eventDefinitionsBase[eventNames.DREAMS_SKATER].isToday() ? 5 - minute : 9000,
         notification: {
             body: 'Dreams skater will begin skating in {t} minutes!'
-        }
-    },
-    [eventNames.SHARD]: {
-        key: eventNames.SHARD,
-        type: eventTypes.WAX,
-        period: 120,
-        hour: (hour) => hour % 2,
-        minute: (minute) => 50 - minute,
-        notification: {
-            body: 'A shard is falling in {t} minutes!',
-            image: '/images/events/shard.jpg'
         }
     },
     [eventNames.SUNSET]: {
@@ -136,23 +128,13 @@ const eventDefinitions = {
     },
 };
 
-const getCurrentDay = (currentDate) => parseInt(getFormattedSkyTime(currentDate, 'i'));
-
-
-export function getShardColor(currentDate) {
-    const currentDay = getCurrentDay(currentDate);
-    const isRedShard = [5, 6, 7].includes(currentDay);
-    return isRedShard ? 'Red' : 'Black';
-}
-
-Object.defineProperty(eventDefinitions[eventNames.SHARD], 'name', {
-    get: () => {
-        const eventData = eventDefinitions[eventNames.SHARD];
-        const shardColor = getShardColor(eventData.currentDate);
-    
-        return `Shard (${shardColor})*`;
-    }
-});
+const eventDefinitions = Object.keys(eventDefinitionsBase).reduce((definitions, eventKey) => ({
+    [eventKey]: {
+        isToday: () => true,
+        ...eventDefinitionsBase[eventKey]
+    },
+    ...definitions 
+}), {});
 
 export { eventDefinitions };
 
