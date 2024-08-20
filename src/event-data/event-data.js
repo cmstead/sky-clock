@@ -4,8 +4,6 @@ const getCurrentDay = (currentDate) => parseInt(getFormattedSkyTime(currentDate,
 const getDayOfTheMonth = (currentDate) => parseInt(getFormattedSkyTime(currentDate, 'd'));
 const getHours = (hourCount) => hourCount * 60;
 
-const getTimeIfIsToday = (key, operation) => eventDefinitionsBase[key].isToday() ? operation() : 0;
-
 export const eventNames = {
     GEYSER: 'geyser',
     GRANDMA: 'grandma',
@@ -82,8 +80,8 @@ const eventDefinitionsBase = {
         type: eventTypes.WAX,
         period: getHours(2),
         isToday: () => [5, 6, 7].includes(getCurrentDay(Date.now())),
-        hour: (hour) => getTimeIfIsToday(eventNames.DREAMS_SKATER, () => (hour + 1) % 2),
-        minute: (minute) => getTimeIfIsToday(eventNames.DREAMS_SKATER, () => 5 - minute),
+        hour: (hour) => (hour + 1) % 2,
+        minute: (minute) => 5 - minute,
         notification: {
             body: 'Dreams skater will begin skating in {t} minutes!'
         }
@@ -94,8 +92,8 @@ const eventDefinitionsBase = {
         type: eventTypes.ENVIRONMENT,
         period: getHours(4),
         isToday: () => getDayOfTheMonth(new Date()) === 1,
-        hour: (hour) => getTimeIfIsToday(eventNames.FIREWORKS_FESTIVAL, () => (hour + 1) % 2),
-        minute: (minute) => getTimeIfIsToday(eventNames.DREAMS_SKATER, () => 0 - minute)
+        hour: (hour) => (hour + 1) % 2,
+        minute: (minute) => 0 - minute
     },
     [eventNames.SUNSET]: {
         name: 'Sanctuary Sunset',
