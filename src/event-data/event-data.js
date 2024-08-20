@@ -22,18 +22,23 @@ export const eventNames = {
 };
 
 export const eventTypes = {
-    WAX: 0,
-    ENVIRONMENT: 1,
-    RESET: 2,
-    CONCERT: 3
+    WAX: {
+        index: 0,
+        name: 'Wax'
+    },
+    ENVIRONMENT: {
+        index: 1,
+        name: 'Environment'
+    },
+    CONCERT: {
+        index: 2,
+        name: 'Aurora Concert'
+    },
+    RESET: {
+        index: 3,
+        name: 'Reset'
+    }
 };
-
-export const eventTypeNames = [
-    'Wax',
-    'Environment',
-    'Reset',
-    'Aurora Concert'
-];
 
 const eventDefinitionsBase = {
     [eventNames.GEYSER]: {

@@ -2,7 +2,7 @@ import Event from "./Event";
 
 import "./Events.css";
 
-import { eventNames, eventDefinitions, eventTypeNames } from "../../event-data/event-data";
+import { eventNames, eventDefinitions } from "../../event-data/event-data";
 import { getEventOffset } from "../../date-tools/event-time-offset";
 
 export default function render({ currentDate }) {
@@ -20,12 +20,12 @@ export default function render({ currentDate }) {
         });
 
         eventRecords.sort((eventRecord1, eventRecord2) => {
-            if (eventRecord1.type > eventRecord2.type) {
+            if (eventRecord1.type.index > eventRecord2.type.index) {
                 return 1;
-            } else if (eventRecord1.type === eventRecord2.type && (!eventRecord1.isToday() ||
+            } else if (eventRecord1.type.index === eventRecord2.type.index && (!eventRecord1.isToday() ||
                 eventRecord1.offsetData.minutesToNextEvent > eventRecord2.offsetData.minutesToNextEvent)) {
                 return 1;
-            } else if (eventRecord1.type === eventRecord2) {
+            } else if (eventRecord1.type.index === eventRecord2) {
                 return 0;
             } else {
                 return -1;
@@ -37,13 +37,13 @@ export default function render({ currentDate }) {
         const finalEventRecordset = [];
 
         eventRecords.forEach((eventRecord) => {
-            if (eventRecord.type !== lastType) {
-                finalEventRecordset.push({ group: eventTypeNames[eventRecord.type] });
+            if (eventRecord.type.index !== lastType) {
+                finalEventRecordset.push({ group: eventRecord.type.name });
             }
 
             finalEventRecordset.push(eventRecord);
 
-            lastType = eventRecord.type;
+            lastType = eventRecord.type.index;
         });
 
         return finalEventRecordset;
