@@ -22,8 +22,8 @@ export default function render({ currentDate }) {
         eventRecords.sort((eventRecord1, eventRecord2) => {
             if (eventRecord1.type > eventRecord2.type) {
                 return 1;
-            } else if (!eventRecord1.isToday() || eventRecord1.type === eventRecord2.type &&
-                eventRecord1.offsetData.minutesToNextEvent > eventRecord2.offsetData.minutesToNextEvent) {
+            } else if (!eventRecord1.isToday() || (eventRecord1.type === eventRecord2.type &&
+                eventRecord1.offsetData.minutesToNextEvent > eventRecord2.offsetData.minutesToNextEvent)) {
                 return 1;
             } else if (eventRecord1.type === eventRecord2) {
                 return 0;
