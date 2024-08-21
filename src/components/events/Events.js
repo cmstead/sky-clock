@@ -1,65 +1,9 @@
 import Event from "./Event";
-
 import "./Events.css";
 
-import { eventNames, eventDefinitions } from "../../event-data/event-data";
-import { getEventOffset } from "../../date-tools/event-time-offset";
+import getSortedAndGroupedEventData from "./getSortedAndGroupedEventData";
 
 export default function render({ currentDate }) {
-
-    function getEventData() {
-        const eventKeyNames = Object.keys(eventNames);
-
-        const eventRecords = eventKeyNames.map((eventKeyName) => {
-            const eventData = eventDefinitions[eventNames[eventKeyName]];
-
-            eventData.offsetData = getEventOffset(eventData, currentDate);
-            eventData.currentDate = currentDate;
-
-            return eventData;
-        });
-
-        eventRecords.sort((eventRecord1, eventRecord2) => {
-            if (eventRecord1.type.index > eventRecord2.type.index) {
-                return 1;
-            } else if (eventRecord1.type.index === eventRecord2.type.index && (!eventRecord1.isToday() ||
-                eventRecord1.offsetData.minutesToNextEvent > eventRecord2.offsetData.minutesToNextEvent)) {
-                return 1;
-            } else if (eventRecord1.type.index === eventRecord2) {
-                return 0;
-            } else {
-                return -1;
-            }
-        });
-
-        let lastType = -1;
-
-        const finalEventRecordset = [];
-
-        eventRecords.forEach((eventRecord) => {
-            if (eventRecord.type.index !== lastType) {
-                finalEventRecordset.push({ group: eventRecord.type.name });
-            }
-
-            finalEventRecordset.push(eventRecord);
-
-            lastType = eventRecord.type.index;
-        });
-
-        return finalEventRecordset;
-    }
-
-    function getGroupHeader({ group: groupName }) {
-        return (
-            <tr className="heading" key={groupName}>
-                <td colSpan="4">{groupName}</td>
-            </tr>
-        );
-    }
-
-    function getEventElement(eventRecord) {
-        return (<Event eventData={eventRecord} key={eventRecord.key}></Event>)
-    }
 
     function isGroupRecord(eventRecord) {
         return eventRecord.group !== undefined;
@@ -78,11 +22,15 @@ export default function render({ currentDate }) {
                 </thead>
                 <tbody>
                     {
-                        getEventData()
+                        getSortedAndGroupedEventData(currentDate)
                             .map((eventData) =>
                                 isGroupRecord(eventData)
-                                    ? getGroupHeader(eventData)
-                                    : getEventElement(eventData))
+                                    ? (
+                                        <tr className="heading" key={eventData.group}>
+                                            <td colSpan="4">{eventData.group}</td>
+                                        </tr>
+                                    )
+                                    : <Event eventData={eventData} key={eventData.key}></Event>)
 
                     }
                     <tr className="heading"><td colSpan="4">Shard Events: <a href="https://sky-shards.pages.dev" target="_blank" rel="noreferrer">visit calendar</a></td></tr>

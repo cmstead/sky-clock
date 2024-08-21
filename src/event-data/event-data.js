@@ -22,23 +22,23 @@ export const eventNames = {
 
 export const eventTypes = {
     WAX: {
-        index: 0,
+        position: 0,
         name: 'Wax'
     },
-    ENVIRONMENT: {
-        index: 1,
-        name: 'Environment'
-    },
     QUESTS: {
-        index: 2,
+        position: 1,
         name: 'Quests'
     },
+    ENVIRONMENT: {
+        position: 2,
+        name: 'Environment'
+    },
     CONCERT: {
-        index: 3,
+        position: 3,
         name: 'Aurora Concert'
     },
     RESET: {
-        index: 4,
+        position: 4,
         name: 'Reset'
     }
 };
