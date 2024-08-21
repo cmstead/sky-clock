@@ -29,12 +29,16 @@ export const eventTypes = {
         index: 1,
         name: 'Environment'
     },
-    CONCERT: {
+    QUESTS: {
         index: 2,
+        name: 'Quests'
+    },
+    CONCERT: {
+        index: 3,
         name: 'Aurora Concert'
     },
     RESET: {
-        index: 3,
+        index: 4,
         name: 'Reset'
     }
 };
@@ -87,6 +91,23 @@ const eventDefinitionsBase = {
             body: 'Dreams skater will begin skating in {t} minutes!'
         }
     },
+    [eventNames.NEST_SUNSET]: {
+        name: 'Nest Sunset',
+        key: eventNames.NEST_SUNSET,
+        type: eventTypes.QUESTS,
+        period: getHours(1),
+        hour: (hour) => 0,
+        minute: (minute) => 40 - minute
+    },
+    [eventNames.PASSAGE_QUESTS]: {
+        name: 'Passage Quests',
+        key: eventNames.PASSAGE_QUESTS,
+        type: eventTypes.QUESTS,
+        period: 15,
+        hour: () => 0,
+        minute: (minute) => 15 - (minute % 15)
+    },
+
     [eventNames.FIREWORKS_FESTIVAL]: {
         name: 'Fireworks Festival',
         key: eventNames.FIREWORKS_FESTIVAL,
@@ -95,22 +116,6 @@ const eventDefinitionsBase = {
         isToday: () => getDayOfTheMonth(new Date()) === 1,
         hour: (hour) => (hour + 1) % 2,
         minute: (minute) => 0 - minute
-    },
-    [eventNames.NEST_SUNSET]: {
-        name: 'Nest Sunset',
-        key: eventNames.NEST_SUNSET,
-        type: eventTypes.ENVIRONMENT,
-        period: getHours(1),
-        hour: (hour) => 0,
-        minute: (minute) => 40 - minute
-    },
-    [eventNames.PASSAGE_QUESTS]: {
-        name: 'Passage Quests',
-        key: eventNames.PASSAGE_QUESTS,
-        type: eventTypes.ENVIRONMENT,
-        period: 15,
-        hour: () => 0,
-        minute: (minute) => 15 - (minute % 15)
     },
     [eventNames.SUNSET]: {
         name: 'Sanctuary Sunset',
