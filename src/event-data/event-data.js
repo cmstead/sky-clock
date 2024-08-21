@@ -9,8 +9,9 @@ export const eventNames = {
     GRANDMA: 'grandma',
     TURTLE: 'turtle',
     SUNSET: 'sunset',
-    // SHARD: 'shard',
     DREAMS_SKATER: 'dreamsSkater',
+    NEST_SUNSET: 'nestSunset',
+    PASSAGE_QUESTS: 'passageQuests',
     FAIRY_RING: 'fairyRing',
     FOREST_RAINBOW: 'forestRainbow',
     DAILY_RESET: 'dailyReset',
@@ -94,6 +95,22 @@ const eventDefinitionsBase = {
         isToday: () => getDayOfTheMonth(new Date()) === 1,
         hour: (hour) => (hour + 1) % 2,
         minute: (minute) => 0 - minute
+    },
+    [eventNames.NEST_SUNSET]: {
+        name: 'Nest Sunset',
+        key: eventNames.NEST_SUNSET,
+        type: eventTypes.ENVIRONMENT,
+        period: getHours(1),
+        hour: (hour) => 0,
+        minute: (minute) => 40 - minute
+    },
+    [eventNames.PASSAGE_QUESTS]: {
+        name: 'Passage Quests',
+        key: eventNames.PASSAGE_QUESTS,
+        type: eventTypes.ENVIRONMENT,
+        period: 15,
+        hour: () => 0,
+        minute: (minute) => 15 - (minute % 15)
     },
     [eventNames.SUNSET]: {
         name: 'Sanctuary Sunset',
