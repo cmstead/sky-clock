@@ -1,26 +1,28 @@
 import { eventNames, eventDefinitions } from "../../event-data/event-data";
 import { getEventOffset } from "../../date-tools/event-time-offset";
 
-export default function getSortedAndGroupedEventData(currentDate) {
-    const eventKeyNames = Object.keys(eventNames);
+function buildEventRecords(eventNames, eventDefinitions, currentDate) {
+    return Object.values(eventNames)
+        .map((eventKeyName) => {
+            const eventData = eventDefinitions[eventKeyName];
 
-    const eventRecords = eventKeyNames.map((eventKeyName) => {
-        const eventData = eventDefinitions[eventNames[eventKeyName]];
+            eventData.offsetData = getEventOffset(eventData, currentDate);
 
-        eventData.offsetData = getEventOffset(eventData, currentDate);
-        eventData.currentDate = currentDate;
+            return eventData;
+        });
+}
 
-        return eventData;
-    });
-
+function sortEventRecords(eventRecords) {
     eventRecords.sort((eventRecord1, eventRecord2) => {
         const timeOffset1 = eventRecord1.offsetData.minutesToNextEvent;
         const timeOffset2 = eventRecord2.offsetData.minutesToNextEvent;
+
         const offsetsAreEqual = timeOffset1 === timeOffset2;
         const offset1IsGreater = timeOffset1 > timeOffset2;
 
         const position1 = eventRecord1.type.position;
         const position2 = eventRecord2.type.position;
+
         const positionsAreEqual = position1 === position2;
         const position1IsGreater = position1 > position2;
 
@@ -34,7 +36,9 @@ export default function getSortedAndGroupedEventData(currentDate) {
             return -1;
         }
     });
+}
 
+function buildEventDataForDisplay(eventRecords) {
     let lastType = -1;
 
     const finalEventRecordset = [];
@@ -50,4 +54,13 @@ export default function getSortedAndGroupedEventData(currentDate) {
     });
 
     return finalEventRecordset;
+}
+
+export default function getSortedAndGroupedEventData(currentDate) {
+
+    const eventRecords = buildEventRecords(eventNames, eventDefinitions, currentDate);
+
+    sortEventRecords(eventRecords);
+
+    return buildEventDataForDisplay(eventRecords)
 }
