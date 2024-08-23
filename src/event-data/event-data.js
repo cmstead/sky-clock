@@ -8,18 +8,19 @@ export const eventNames = {
     GEYSER: 'geyser',
     GRANDMA: 'grandma',
     TURTLE: 'turtle',
-    SUNSET: 'sunset',
     DREAMS_SKATER: 'dreamsSkater',
     NEST_SUNSET: 'nestSunset',
     PASSAGE_QUESTS: 'passageQuests',
-    FAIRY_RING: 'fairyRing',
-    FOREST_RAINBOW: 'forestRainbow',
     DAILY_RESET: 'dailyReset',
-    CONCERT_GRABSEATS: 'grabSeats',
-    CONCERT_STARTS: 'concertStarts',
+    AURORA_CONCERT: 'auroraConcertStarts',
     FIREWORKS_FESTIVAL: 'fireworksFestival',
     WEEKLY_RESET: 'weeklyReset',
-    ITEM_ROTATION: 'itemRotation'
+    ITEM_ROTATION: 'itemRotation',
+    SPELL_SHOP_EXPANDED: 'spellShopExpanded',
+    SPELL_SHOP_STANDARD: 'spellShopStandard',
+    // FAIRY_RING: 'fairyRing',
+    // FOREST_RAINBOW: 'forestRainbow',
+    // SANCTUARY_SUNSET: 'sanctuarySunset',
 };
 
 export const eventTypes = {
@@ -31,22 +32,22 @@ export const eventTypes = {
         position: 1,
         name: 'Quests'
     },
-    RESET: {
+    CONCERT: {
         position: 2,
+        name: 'Concerts and Shows'
+    },
+    SHOPS: {
+        position: 3,
+        name: 'Shops'
+    },
+    RESET: {
+        position: 4,
         name: 'Reset'
     },
     ENVIRONMENT: {
-        position: 3,
+        position: 5,
         name: 'Environment'
     },
-    CONCERT: {
-        position: 4,
-        name: 'Aurora Concert'
-    },
-    WEEKLY_EVENTS: {
-        position: 5,
-        name: 'Weekly Events'
-    }
 };
 
 const eventDefinitionsBase = {
@@ -113,19 +114,9 @@ const eventDefinitionsBase = {
         hour: () => 0,
         minute: (minute) => 15 - (minute % 15)
     },
-
-    [eventNames.FIREWORKS_FESTIVAL]: {
-        name: 'Fireworks Festival',
-        key: eventNames.FIREWORKS_FESTIVAL,
-        type: eventTypes.ENVIRONMENT,
-        period: getHours(4),
-        isToday: () => getDayOfTheMonth(new Date()) === 1,
-        hour: (hour) => (hour + 1) % 2,
-        minute: (minute) => 0 - minute
-    },
-    [eventNames.SUNSET]: {
+    [eventNames.SANCTUARY_SUNSET]: {
         name: 'Sanctuary Sunset',
-        key: eventNames.SUNSET,
+        key: eventNames.SANCTUARY_SUNSET,
         type: eventTypes.ENVIRONMENT,
         period: getHours(2),
         hour: (hour) => hour % 2,
@@ -155,26 +146,27 @@ const eventDefinitionsBase = {
         hour: (hour) => 24 - hour,
         minute: (minute) => 0 - minute
     },
-    [eventNames.CONCERT_GRABSEATS]: {
-        name: 'Grab Seats',
-        key: eventNames.CONCERT_GRABSEATS,
-        type: eventTypes.CONCERT,
-        period: getHours(4),
-        hour: (hour) => (2 + hour) % 4,
-        minute: (minute) => 0 - minute,
-    },
-    [eventNames.CONCERT_STARTS]: {
-        name: 'Concert Starts',
-        key: eventNames.CONCERT_STARTS,
+    [eventNames.AURORA_CONCERT]: {
+        name: 'Aurora Concert',
+        key: eventNames.AURORA_CONCERT,
         type: eventTypes.CONCERT,
         period: getHours(4),
         hour: (hour) => (2 + hour) % 4,
         minute: (minute) => 10 - minute,
     },
+    [eventNames.FIREWORKS_FESTIVAL]: {
+        name: 'Fireworks Festival',
+        key: eventNames.FIREWORKS_FESTIVAL,
+        type: eventTypes.CONCERT,
+        period: getHours(4),
+        isToday: () => getDayOfTheMonth(new Date()) === 1,
+        hour: (hour) => (hour + 1) % 2,
+        minute: (minute) => 0 - minute
+    },
     [eventNames.WEEKLY_RESET]: {
         name: 'Weekly Reset',
         key: eventNames.WEEKLY_RESET,
-        type: eventTypes.WEEKLY_EVENTS,
+        type: eventTypes.RESET,
         period: getHours(7 * 24),
         days: (day) => 6 - day,
         hour: (hour) => 24 - hour,
@@ -183,17 +175,38 @@ const eventDefinitionsBase = {
     [eventNames.ITEM_ROTATION]: {
         name: 'Store Item Rotation',
         key: eventNames.ITEM_ROTATION,
-        type: eventTypes.WEEKLY_EVENTS,
+        type: eventTypes.SHOPS,
         period: getHours(7 * 24),
         days: (day) => 7 - day,
         hour: (hour) => 24 - hour,
         minute: (minute) => 0 - minute
-    }
+    },
+    [eventNames.SPELL_SHOP_EXPANDED]: {
+        name: 'Spell Shop Expanded Selection',
+        key: eventNames.SPELL_SHOP_EXPANDED,
+        type: eventTypes.SHOPS,
+        showInClock: () => [1, 2, 3, 4].includes(getCurrentDay(Date.now())),
+        period: getHours(7 * 24),
+        days: (day) => 11 - day,
+        hour: (hour) => 24 - hour,
+        minute: (minute) => 0 - minute
+    },
+    [eventNames.SPELL_SHOP_STANDARD]: {
+        name: 'Spell Shop Regular Selection',
+        key: eventNames.SPELL_SHOP_STANDARD,
+        type: eventTypes.SHOPS,
+        showInClock: () => [5, 6, 7].includes(getCurrentDay(Date.now())),
+        period: getHours(7 * 24),
+        days: (day) => 7 - day,
+        hour: (hour) => 24 - hour,
+        minute: (minute) => 0 - minute
+    },
 };
 
 const eventDefinitions = Object.keys(eventDefinitionsBase).reduce((definitions, eventKey) => ({
     [eventKey]: {
         isToday: () => true,
+        showInClock: () => true,
         days: () => 0,
         ...eventDefinitionsBase[eventKey]
     },

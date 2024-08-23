@@ -29,10 +29,12 @@ export default function render({ currentDate }) {
                                     ? <GroupHeading
                                         eventData={eventData}
                                         key={`group-${eventData.group}`}></GroupHeading>
-                                    : <Event
-                                        eventData={eventData}
-                                        currentDate={currentDate}
-                                        key={eventData.key}></Event>)
+                                    : eventData.showInClock() ?
+                                        <Event
+                                            eventData={eventData}
+                                            currentDate={currentDate}
+                                            key={eventData.key}></Event>
+                                        : '')
 
                     }
                     <tr className="heading">
