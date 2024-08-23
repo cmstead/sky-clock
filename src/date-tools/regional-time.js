@@ -2,12 +2,13 @@ const dateFnsTz = require('date-fns-tz');
 const dateFns = require('date-fns');
 
 const US_PACIFIC_TIME_ZONE = 'America/Los_Angeles';
-const TIME_PATTERN = 'HH:mm:ss';
+const TIME_PATTERN = 'i:HH:mm:ss';
 
 function getTimeTokens(formattedTime) {
-    const [hour, minute, second] = formattedTime.split(':');
+    const [day, hour, minute, second] = formattedTime.split(':');
 
     return {
+        day: parseInt(day),
         hour: parseInt(hour),
         minute: parseInt(minute),
         second: parseInt(second)

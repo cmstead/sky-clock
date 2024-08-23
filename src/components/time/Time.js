@@ -4,6 +4,6 @@ function padTime(time) {
     return time < 10 ? `0${time}` : time;
 }
 
-export default function render({ hour, minute, second = null }) {
-    return (<span className="time">{`${padTime(hour)}:${padTime(minute)}${second !== null ? (`:${padTime(second)}`) : ''}`}</span>);
+export default function render({ hour, minute }) {
+    return (<span className="time">{`${padTime(hour)}:${padTime(minute)}`}</span>);
 }

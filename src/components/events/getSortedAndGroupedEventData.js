@@ -1,14 +1,15 @@
 import { eventNames, eventDefinitions } from "../../event-data/event-data";
 import { getEventOffset } from "../../date-tools/event-time-offset";
 
-function buildEventRecords(eventNames, eventDefinitions, currentDate) {
+function buildEventRecords(currentDate) {
     return Object.values(eventNames)
         .map((eventKeyName) => {
             const eventData = eventDefinitions[eventKeyName];
 
-            eventData.offsetData = getEventOffset(eventData, currentDate);
-
-            return eventData;
+            return {
+                offsetData: getEventOffset(eventData, currentDate),
+                ...eventData
+            };
         });
 }
 
@@ -58,7 +59,7 @@ function buildEventDataForDisplay(eventRecords) {
 
 export default function getSortedAndGroupedEventData(currentDate) {
 
-    const eventRecords = buildEventRecords(eventNames, eventDefinitions, currentDate);
+    const eventRecords = buildEventRecords(currentDate);
 
     sortEventRecords(eventRecords);
 

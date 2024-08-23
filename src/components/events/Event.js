@@ -8,7 +8,19 @@ import useNotification from "../../hooks/useNotification";
 
 export default function Event({ eventData, currentDate }) {
     const [isSubscribed, toggleNotificationSubscription] = useNotification({ eventData, currentDate });
-    const { hour, minute, hoursOffset, minutesOffset } = eventData.offsetData;
+    const { day, hour, minute, hoursOffset, minutesOffset } = eventData.offsetData;
+
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    const nextDay = Math.floor(hour / 24) + (day - 1);
+
+    function TimeDayDisplay() {
+        return (
+            hoursOffset > 24 ?
+                days[nextDay] :
+                <Time day={day} hour={hour} minute={minute}></Time>
+        );
+    }
 
     return (
         <tr className="event">
@@ -20,7 +32,7 @@ export default function Event({ eventData, currentDate }) {
                     onClick={toggleNotificationSubscription} />
             </td>
             <td>{eventData.name}</td>
-            <td>{eventData.isToday() ? <Time hour={hour} minute={minute}></Time> : 'No event today'}</td>
+            <td>{eventData.isToday() ? TimeDayDisplay() : 'No event today'}</td>
             <td>{eventData.isToday() ? `${hoursOffset}h ${minutesOffset}m` : ''}</td>
         </tr>
     );

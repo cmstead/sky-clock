@@ -31,7 +31,6 @@ function App() {
         <main>
           <Clock date={currentDate}></Clock>
           <Events currentDate={currentDate}></Events>
-          <WeeklyReset currentDate={currentDate}></WeeklyReset>
         </main>
       </div>
           <Contributors></Contributors>

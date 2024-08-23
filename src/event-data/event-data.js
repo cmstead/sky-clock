@@ -17,7 +17,9 @@ export const eventNames = {
     DAILY_RESET: 'dailyReset',
     CONCERT_GRABSEATS: 'grabSeats',
     CONCERT_STARTS: 'concertStarts',
-    FIREWORKS_FESTIVAL: 'fireworksFestival'
+    FIREWORKS_FESTIVAL: 'fireworksFestival',
+    WEEKLY_RESET: 'weeklyReset',
+    ITEM_ROTATION: 'itemRotation'
 };
 
 export const eventTypes = {
@@ -40,6 +42,10 @@ export const eventTypes = {
     RESET: {
         position: 4,
         name: 'Reset'
+    },
+    WEEKLY_EVENTS: {
+        position: 5,
+        name: 'Weekly Events'
     }
 };
 
@@ -165,11 +171,30 @@ const eventDefinitionsBase = {
         hour: (hour) => (2 + hour) % 4,
         minute: (minute) => 10 - minute,
     },
+    [eventNames.WEEKLY_RESET]: {
+        name: 'Weekly Reset',
+        key: eventNames.WEEKLY_RESET,
+        type: eventTypes.WEEKLY_EVENTS,
+        period: getHours(7 * 24),
+        days: (day) => 6 - day,
+        hour: (hour) => 24 - hour,
+        minute: (minute) => 0 - minute
+    },
+    [eventNames.ITEM_ROTATION]: {
+        name: 'Store Item Rotation',
+        key: eventNames.ITEM_ROTATION,
+        type: eventTypes.WEEKLY_EVENTS,
+        period: getHours(7 * 24),
+        days: (day) => 7 - day,
+        hour: (hour) => 24 - hour,
+        minute: (minute) => 0 - minute
+    }
 };
 
 const eventDefinitions = Object.keys(eventDefinitionsBase).reduce((definitions, eventKey) => ({
     [eventKey]: {
         isToday: () => true,
+        days: () => 0,
         ...eventDefinitionsBase[eventKey]
     },
     ...definitions 

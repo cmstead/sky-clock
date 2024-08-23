@@ -10,7 +10,7 @@ export default function render({ currentDate }) {
     const currentDay = parseInt(getFormattedSkyTime(currentDate, 'i'));
 
     const eventData = weeklyReset;
-    const minutesToMidnight = getMinutesToNextEvent(currentDate, eventData);
+    const minutesToMidnight = getMinutesToNextEvent(eventData, currentDate);
     const daysUntilReset = minutesToMidnight === 0 ? 7 - currentDay : 6 - currentDay;
 
     const nextEventDate = add(currentDate, { days: daysUntilReset, minutes: minutesToMidnight });
