@@ -5,7 +5,6 @@ import Particles from "./components/particles-background/particles";
 import Contributors from './components/contributor/Contributors';
 import Clock from './components/clock/Clock';
 import Events from './components/events/Events';
-import WeeklyReset from './components/events/WeeklyReset';
 import SelectTheme from './components/theme/SelectTheme';
 
 function App() {
