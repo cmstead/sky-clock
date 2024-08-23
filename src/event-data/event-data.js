@@ -31,17 +31,17 @@ export const eventTypes = {
         position: 1,
         name: 'Quests'
     },
-    ENVIRONMENT: {
+    RESET: {
         position: 2,
+        name: 'Reset'
+    },
+    ENVIRONMENT: {
+        position: 3,
         name: 'Environment'
     },
     CONCERT: {
-        position: 3,
-        name: 'Aurora Concert'
-    },
-    RESET: {
         position: 4,
-        name: 'Reset'
+        name: 'Aurora Concert'
     },
     WEEKLY_EVENTS: {
         position: 5,
