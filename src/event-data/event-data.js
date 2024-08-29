@@ -1,8 +1,13 @@
 import { getFormattedSkyTime } from "../date-tools/regional-time";
 
+const getCurrentCalendarDate = (currentDate) => new Date(getFormattedSkyTime(currentDate, 'yyyy-MM-dd'))
 const getCurrentDay = (currentDate) => parseInt(getFormattedSkyTime(currentDate, 'i'));
 const getDayOfTheMonth = (currentDate) => parseInt(getFormattedSkyTime(currentDate, 'd'));
 const getHours = (hourCount) => hourCount * 60;
+
+const getNextWeeklyEventDay = (dayOfTheWeek) => getCurrentDay(Date.now()) <= (dayOfTheWeek % 7) ? dayOfTheWeek : dayOfTheWeek + 6;
+
+const travelingSpiritComparisonDate = new Date('2024-08-29');
 
 export const eventNames = {
     GEYSER: 'geyser',
@@ -18,6 +23,8 @@ export const eventNames = {
     ITEM_ROTATION: 'itemRotation',
     SPELL_SHOP_EXPANDED: 'spellShopExpanded',
     SPELL_SHOP_STANDARD: 'spellShopStandard',
+    TRAVELING_SPIRIT_VISIT: 'travelingSpiritVisit',
+    TRAVELING_SPIRIT_LEAVE: 'travelingSpiritLeave',
     // FAIRY_RING: 'fairyRing',
     // FOREST_RAINBOW: 'forestRainbow',
     // SANCTUARY_SUNSET: 'sanctuarySunset',
@@ -38,7 +45,7 @@ export const eventTypes = {
     },
     SHOPS: {
         position: 3,
-        name: 'Shops'
+        name: 'Shops and Spirits'
     },
     RESET: {
         position: 4,
@@ -168,7 +175,7 @@ const eventDefinitionsBase = {
         key: eventNames.WEEKLY_RESET,
         type: eventTypes.RESET,
         period: getHours(7 * 24),
-        days: (day) => 6 - day,
+        days: (day) => getNextWeeklyEventDay(6) - day,
         hour: (hour) => 24 - hour,
         minute: (minute) => 0 - minute
     },
@@ -177,7 +184,7 @@ const eventDefinitionsBase = {
         key: eventNames.ITEM_ROTATION,
         type: eventTypes.SHOPS,
         period: getHours(7 * 24),
-        days: (day) => 7 - day,
+        days: (day) => getNextWeeklyEventDay(1) - day,
         hour: (hour) => 24 - hour,
         minute: (minute) => 0 - minute
     },
@@ -187,7 +194,7 @@ const eventDefinitionsBase = {
         type: eventTypes.SHOPS,
         showInClock: () => [1, 2, 3, 4].includes(getCurrentDay(Date.now())),
         period: getHours(7 * 24),
-        days: (day) => 11 - day,
+        days: (day) => getNextWeeklyEventDay(5) - (day+1),
         hour: (hour) => 24 - hour,
         minute: (minute) => 0 - minute
     },
@@ -197,8 +204,28 @@ const eventDefinitionsBase = {
         type: eventTypes.SHOPS,
         showInClock: () => [5, 6, 7].includes(getCurrentDay(Date.now())),
         period: getHours(7 * 24),
-        days: (day) => 7 - day,
+        days: (day) => getNextWeeklyEventDay(1) - day,
         hour: (hour) => 24 - hour,
+        minute: (minute) => 0 - minute
+    },
+    [eventNames.TRAVELING_SPIRIT_VISIT]: {
+        name: 'Next Traveling Spirit',
+        key: eventNames.TRAVELING_SPIRIT_VISIT,
+        type: eventTypes.SHOPS,
+        showInClock: () => (getCurrentCalendarDate(Date.now()) - travelingSpiritComparisonDate) % 14 > 3,
+        period: getHours(14 * 24),
+        days: (day) => getNextWeeklyEventDay(4) - day,
+        hour: (hour) => 24 - hour, 
+        minute: (minute) => 0 - minute
+    },
+    [eventNames.TRAVELING_SPIRIT_LEAVE]: {
+        name: 'Traveling Spirit Leaves',
+        key: eventNames.TRAVELING_SPIRIT_LEAVE,
+        type: eventTypes.SHOPS,
+        showInClock: () => (getCurrentCalendarDate(Date.now()) - travelingSpiritComparisonDate) % 14 < 3,
+        period: getHours(14 * 24),
+        days: (day) => getNextWeeklyEventDay(1) - day,
+        hour: (hour) => 24 - hour, 
         minute: (minute) => 0 - minute
     },
 };
