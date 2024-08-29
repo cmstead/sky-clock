@@ -100,7 +100,7 @@ const eventDefinitionsBase = {
         period: getHours(2),
         isToday: () => [5, 6, 7].includes(getCurrentDay(Date.now())),
         hour: (hour) => (hour + 1) % 2,
-        minute: (minute) => 5 - minute,
+        minute: (minute) => 0 - minute,
         notification: {
             body: 'Dreams skater will begin skating in {t} minutes!'
         }
