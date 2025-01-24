@@ -23,11 +23,11 @@ export const eventNames = {
     ITEM_ROTATION: 'itemRotation',
     SPELL_SHOP_EXPANDED: 'spellShopExpanded',
     SPELL_SHOP_STANDARD: 'spellShopStandard',
-    // TRAVELING_SPIRIT_VISIT: 'travelingSpiritVisit',
-    // TRAVELING_SPIRIT_LEAVE: 'travelingSpiritLeave',
-    // FAIRY_RING: 'fairyRing',
-    // FOREST_RAINBOW: 'forestRainbow',
-    // SANCTUARY_SUNSET: 'sanctuarySunset',
+    WIREFRAME_GALLERIES: 'wireframeGalleries',
+    BALL_GAME: 'ballGame',
+    OREO_PARTY: 'oreoParty',
+    SPIRITS_PARADE: 'spiritsParade',
+    FESTIVAL_FIREWORKS: 'festivalFireworks',
 };
 
 export const eventTypes = {
@@ -39,20 +39,24 @@ export const eventTypes = {
         position: 1,
         name: 'Quests'
     },
-    CONCERT: {
-        position: 2,
-        name: 'Concerts and Shows'
-    },
     SHOPS: {
-        position: 3,
+        position: 2,
         name: 'Shops and Spirits'
     },
     RESET: {
-        position: 4,
+        position: 3,
         name: 'Reset'
     },
-    ENVIRONMENT: {
+    CONCERT: {
+        position: 4,
+        name: 'Concerts and Shows'
+    },
+    ANNIVERSARY_5: {
         position: 5,
+        name: 'Fifth Anniversary Events'
+    },
+    ENVIRONMENT: {
+        position: 6,
         name: 'Environment'
     },
 };
@@ -121,29 +125,45 @@ const eventDefinitionsBase = {
         hour: () => 0,
         minute: (minute) => 15 - (minute % 15)
     },
-    [eventNames.SANCTUARY_SUNSET]: {
-        name: 'Sanctuary Sunset',
-        key: eventNames.SANCTUARY_SUNSET,
-        type: eventTypes.ENVIRONMENT,
+    [eventNames.WIREFRAME_GALLERIES]: {
+        name: 'Wireframe Galleries',
+        key: eventNames.WIREFRAME_GALLERIES,
+        type: eventTypes.ANNIVERSARY_5,
         period: getHours(2),
         hour: (hour) => hour % 2,
-        minute: (minute) => 50 - minute
-    },
-    [eventNames.FAIRY_RING]: {
-        name: 'Fairy Ring',
-        key: eventNames.FAIRY_RING,
-        type: eventTypes.ENVIRONMENT,
-        period: getHours(1),
-        hour: (_) => 0,
-        minute: (minute) => 50 - minute
-    },
-    [eventNames.FOREST_RAINBOW]: {
-        name: 'Forest Brook Rainbow',
-        key: eventNames.FOREST_RAINBOW,
-        type: eventTypes.ENVIRONMENT,
-        period: getHours(12),
-        hour: (hour) => Math.abs(5 - hour) % 12,
         minute: (minute) => 0 - minute
+    },
+    [eventNames.BALL_GAME]: {
+        name: 'Ball Game',
+        key: eventNames.BALL_GAME,
+        type: eventTypes.ANNIVERSARY_5,
+        period: getHours(2),
+        hour: (hour) => (hour + 1) % 2,
+        minute: (minute) => 0 - minute
+    },
+    [eventNames.OREO_PARTY]: {
+        name: 'Oreo Party',
+        key: eventNames.OREO_PARTY,
+        type: eventTypes.ANNIVERSARY_5,
+        period: getHours(2),
+        hour: (hour) => (hour + 1) % 2,
+        minute: (minute) => 15 - minute
+    },
+    [eventNames.SPIRITS_PARADE]: {
+        name: 'Spirits Parade',
+        key: eventNames.SPIRITS_PARADE,
+        type: eventTypes.ANNIVERSARY_5,
+        period: getHours(2),
+        hour: (hour) => (hour + 1) % 2,
+        minute: (minute) => 30 - minute
+    },
+    [eventNames.FESTIVAL_FIREWORKS]: {
+        name: 'Festival Fireworks',
+        key: eventNames.FESTIVAL_FIREWORKS,
+        type: eventTypes.ANNIVERSARY_5,
+        period: getHours(2),
+        hour: (hour) => (hour + 1) % 2,
+        minute: (minute) => 46 - minute
     },
     [eventNames.DAILY_RESET]: {
         name: 'Daily Reset',
