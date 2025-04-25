@@ -177,7 +177,7 @@ const eventDefinitionsBase = {
         name: 'Aurora Concert',
         key: eventNames.AURORA_CONCERT,
         type: eventTypes.CONCERT,
-        period: getHours(4),
+        period: getHours(2),
         hour: (hour) => (2 + hour) % 4,
         minute: (minute) => 10 - minute,
     },
