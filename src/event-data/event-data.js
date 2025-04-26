@@ -178,7 +178,7 @@ const eventDefinitionsBase = {
         key: eventNames.AURORA_CONCERT,
         type: eventTypes.CONCERT,
         period: getHours(2),
-        hour: (hour) => (2 + hour) % 4,
+        hour: (hour) => (2 + hour) % 2,
         minute: (minute) => 10 - minute,
     },
     [eventNames.FIREWORKS_FESTIVAL]: {
