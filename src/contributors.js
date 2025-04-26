@@ -14,6 +14,10 @@ const contributors = [
     {
         name: 'nodeMD',
         url: 'https://github.com/nodeMD'
+    },
+    {
+        name: 'Meowtrix',
+        url: 'https://github.com/Gelleode'
     }
 ];
 

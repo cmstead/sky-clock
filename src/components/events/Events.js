@@ -2,19 +2,18 @@ import Event from "./Event";
 import "./Events.css";
 import GroupHeading from "./GroupHeading";
 import getSortedAndGroupedEventData from "./getSortedAndGroupedEventData";
-import { useState } from "react";
+import useLocalstorage from "../../hooks/localstorage";
 
-export default function Events({ currentDate }) {
-    const [collapsedGroups, setCollapsedGroups] = useState(new Set());
+export default function Events({ currentDate }) {  
+    const [collapsedGroups, setCollapsedGroups] = useLocalstorage("collapsedGroups", new Set());
 
-    // Toggle collapse/expand for a group
     const toggleGroupCollapse = (groupKey) => {
         setCollapsedGroups((prev) => {
             const newCollapsedGroups = new Set(prev);
             if (newCollapsedGroups.has(groupKey)) {
-                newCollapsedGroups.delete(groupKey); // Expand the group
+                newCollapsedGroups.delete(groupKey);
             } else {
-                newCollapsedGroups.add(groupKey); // Collapse the group
+                newCollapsedGroups.add(groupKey);
             }
             return newCollapsedGroups;
         });

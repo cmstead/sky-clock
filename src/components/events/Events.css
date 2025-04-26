@@ -46,7 +46,7 @@ table tbody tr.heading {
     background-color: var(--color-tr-head);
 }
 
-table tbody tr.heading.collapsable:hover {
+table tbody tr.heading.collapsible:hover {
     background-color: var(--color-bg-accent-hover);
     color: var(--color-text-accent-dark); 
 }
@@ -74,4 +74,5 @@ tr.heading td {
     right: 0;
     font-size: 1.2em;
     padding-left: 10px;
+    color: var(--color-text-accent);
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function setLocalstorageItem(key, value) {
         const valueString = JSON.stringify(value);
@@ -12,15 +12,21 @@ export default function useLocalstorage(key, initialValue = null) {
 
     const storedValue = localStorage.getItem(key);
     const parsedValue = Boolean(storedValue) ? JSON.parse(storedValue) : null;
-    const [value, setValue] = useState(parsedValue ?? initialValue);
+    
+    const initialState = initialValue instanceof Set
+        ? new Set(parsedValue || [])
+        : parsedValue ?? initialValue;
 
-    setLocalstorageItem(key, value);
+    const [value, setValue] = useState(initialState);
 
-    function updateValue(value) {
-        if (typeof value !== 'undefined') {
-            setLocalstorageItem(key, value);
-            
-            setValue(value);
+    useEffect(() => {
+        const valueToStore = value instanceof Set ? Array.from(value) : value;
+        setLocalstorageItem(key, valueToStore);
+    }, [key, value]);
+
+    function updateValue(newValue) {
+        if (typeof newValue !== 'undefined') {
+            setValue(newValue);
         }
     }
 
