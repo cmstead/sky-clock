@@ -8,6 +8,7 @@
   /* Background */
   --color-bg-primary: #fff;
   --color-bg-accent: #87CEEB;
+  --color-bg-accent-hover: #6cb3d6;
 
   /* Table */
   --color-tr-head: #efefef;
@@ -36,6 +37,7 @@
   /* Background */
   --color-bg-primary: #070F16;
   --color-bg-accent: #102233;
+  --color-bg-accent-hover: #0B1823;
 
   /* Table */
   --color-tr-head: #102233;
