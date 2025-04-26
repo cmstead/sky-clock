@@ -1,10 +1,15 @@
 .events-table {
     text-align: center;
-    padding-top: 1.6em
+    padding-top: 1.6em;
 }
 
 #events {
-    margin: 0 auto;
+    table-layout: fixed;
+    margin: 0 auto; 
+    border-collapse: collapse; 
+    width: auto; 
+    max-width: 800px; 
+    min-width: 600px; 
 }
 
 .events-table table {
@@ -15,14 +20,15 @@ th, td {
     text-align: left;
     margin: 0;
     padding: 0.4em;
-
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
 }
 
 td + td, th + th {
     padding-left: 2.8em;
     padding-bottom: 0.5em;
 }
-
 
 tbody tr:nth-child(2n) {
     background-color: var(--color-tr-even);
@@ -43,4 +49,24 @@ table tbody tr.heading {
 tr.heading td {
     text-align: center;
     font-weight: bold;
+}
+
+.group-heading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.group-heading-container .group-text {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.group-heading-container .arrow {
+    position: absolute;
+    right: 0;
+    font-size: 1.2em;
+    padding-left: 10px;
 }

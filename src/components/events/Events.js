@@ -1,10 +1,24 @@
 import Event from "./Event";
 import "./Events.css";
 import GroupHeading from "./GroupHeading";
-
 import getSortedAndGroupedEventData from "./getSortedAndGroupedEventData";
+import { useState } from "react";
 
-export default function render({ currentDate }) {
+export default function Events({ currentDate }) {
+    const [collapsedGroups, setCollapsedGroups] = useState(new Set());
+
+    // Toggle collapse/expand for a group
+    const toggleGroupCollapse = (groupKey) => {
+        setCollapsedGroups((prev) => {
+            const newCollapsedGroups = new Set(prev);
+            if (newCollapsedGroups.has(groupKey)) {
+                newCollapsedGroups.delete(groupKey); // Expand the group
+            } else {
+                newCollapsedGroups.add(groupKey); // Collapse the group
+            }
+            return newCollapsedGroups;
+        });
+    };
 
     function isGroupRecord(eventRecord) {
         return eventRecord.group !== undefined;
@@ -25,17 +39,21 @@ export default function render({ currentDate }) {
                     {
                         getSortedAndGroupedEventData(currentDate)
                             .map((eventData, index) =>
-                                isGroupRecord(eventData)
-                                    ? <GroupHeading
+                                isGroupRecord(eventData) ? (
+                                    <GroupHeading
                                         eventData={eventData}
-                                        key={`group-${eventData.group}`}></GroupHeading>
-                                    : eventData.showInClock() ?
-                                        <Event
-                                            eventData={eventData}
-                                            currentDate={currentDate}
-                                            key={eventData.key}></Event>
-                                        : '')
-
+                                        key={`group-${eventData.group}`}
+                                        isCollapsed={collapsedGroups.has(eventData.group)}
+                                        onToggle={() => toggleGroupCollapse(eventData.group)}
+                                    />
+                                ) : !collapsedGroups.has(eventData.type.name) && eventData.showInClock() ? (
+                                    <Event
+                                        eventData={eventData}
+                                        currentDate={currentDate}
+                                        key={eventData.key}
+                                    />
+                                ) : null
+                            )
                     }
                     <tr className="heading">
                         <td colSpan="4">
