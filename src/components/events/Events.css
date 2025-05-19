@@ -6,23 +6,16 @@
 #events {
     table-layout: fixed;
     margin: 0 auto; 
-    border-collapse: collapse; 
-    width: auto; 
-    max-width: 800px; 
-    min-width: 600px; 
-}
-
-.events-table table {
     border-collapse: collapse;
+    max-width: 540px;
+    width: 100%;
 }
 
 th, td {
     text-align: left;
     margin: 0;
     padding: 0.4em;
-    white-space: nowrap; 
     overflow: hidden; 
-    text-overflow: ellipsis; 
 }
 
 td + td, th + th {
